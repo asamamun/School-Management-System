@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
+
 class AuthenticatedSessionController extends Controller
 {
     /**
@@ -27,6 +28,17 @@ class AuthenticatedSessionController extends Controller
         $request->authenticate();
 
         $request->session()->regenerate();
+
+        $role = Auth::user()->role;
+        if($role == 'admin' || $role == 'staff'){
+            return redirect()->intended(route('admin.dashboard', absolute: false));
+        }
+        if($role == 'teacher'){
+            return redirect()->intended(route('teacher.dashboard', absolute: false));
+        }
+        if($role == 'student'){
+            return redirect()->intended(route('student.dashboard', absolute: false));
+        }
 
         return redirect()->intended(route('dashboard', absolute: false));
     }
