@@ -4,7 +4,7 @@
 {{-- {{ dd($shifts)}} --}}
 <div class="container">
     
-    <a href="{{ route('shift.create') }}" class="btn btn-sm btn-outline-secondary">Create</a>
+    <a href="{{ route('shift.create') }}" class="btn btn-sm btn-outline-secondary"><i class="fa fa-plus"></i> Create</a>
     <table class="table">
         <thead>
             <tr>
@@ -25,14 +25,17 @@
                     <td>{{ $shift->duration }}</td>
                     <td>{{ $shift->status }}</td>
                     <td>
-                        <a href="{{ route('shift.edit', $shift) }}" class="btn btn-sm btn-outline-secondary">Edit</a>
+                        <div class="d-flex justify-content-center">
+                        <a href="{{ route('shift.edit', $shift) }}" class="btn btn-sm btn-outline-secondary me-2"><i
+                            class="fa fa-edit"></i></a>
                         <form action="{{ route('shift.destroy', $shift) }}" method="post">
                             @csrf
                             @method('delete')
                             
-                            <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+                            <button type="submit" class="btn btn-sm btn-outline-danger"><i
+                                class="fa fa-trash"></i></button>
                         </form>
-                        
+                    </div>
                     </td>
                 </tr>
             @endforeach
