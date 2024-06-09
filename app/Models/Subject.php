@@ -16,5 +16,13 @@ class Subject extends Model
         'version',
         'status'
 ];
+public function standards()
+ {
+ return $this->belongsToMany(Standard::class);
+ }
+public function users()
+ {
+ return $this->belongsToMany(User::class);
+ }
 }
 
