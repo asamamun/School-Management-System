@@ -1,4 +1,4 @@
-@extends('layouts.adminapp', ['title' => 'Admin'])
+@extends('layouts.adminapp', ['title' => 'Admin | Subject'])
 @section('content')
     <p>Subject show</p>
     <a href="{{ route('subject.create') }}" class="btn btn-success mb-3"><i class="fa fa-plus"></i> Create</a>
@@ -22,15 +22,20 @@
                     <td>{{ $subject->version }}</td>
                     <td>{{ $subject->status ? 'Active' : 'Inactive' }}</td>
                     <td>
-                        <div class="d-flex justify-content-between">
-                            <a href="{{ route('subject.edit', $subject->id) }}" class="btn btn-primary btn-sm"><i
-                                    class="fa fa-edit"></i></a>
+                        <div class="d-flex justify-content-center">
+                            <a href="{{ route('subject.edit', $subject) }}" class="btn btn-sm btn-outline-secondary">
+                                <i class="fa fa-edit"></i>
+                            </a>
+                            {{-- {{ route('subject.show', $subject) }} --}}
+                            <a href="#" class="btn btn-sm btn-outline-primary">
+                                <i class="fa fa-eye"></i>
+                            </a>
 
-                            <form action="{{ route('subject.destroy', $subject->id) }}" method="POST">
+                            <form action="{{ route('subject.destroy', $subject) }}" method="post">
                                 @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-sm"
-                                    onclick="return confirm('Are you sure you want to delete this subject?')"><i
+                                @method('delete')
+
+                                <button type="submit" class="btn btn-sm btn-outline-danger"><i
                                         class="fa fa-trash"></i></button>
                             </form>
                         </div>
@@ -44,4 +49,3 @@
         {{ $subjects->links() }}
     </div>
 @endsection
-

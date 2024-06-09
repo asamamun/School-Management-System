@@ -20,6 +20,9 @@ return new class extends Migration
             $table->string('last_name')->required();
             $table->string('mobile')->required();
             $table->string('email')->required();
+            //user_id foreign key
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             //standard_id foreign key
             $table->unsignedBigInteger('standard_id');
             $table->foreign('standard_id')->references('id')->on('standards')->onDelete('cascade');            
