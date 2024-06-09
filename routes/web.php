@@ -2,6 +2,9 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SectionController;
+use App\Http\Controllers\ShiftController;
+use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\CheckAdmin;
 use App\Http\Middleware\CheckStaff;
@@ -28,9 +31,14 @@ Route::middleware('auth')->group(function () {
    
 //    Route::resource('admin', UserController::class);
 // });
-Route::middleware(['auth','admin'])->group(function () {
+
+// Route::middleware(['auth','admin'])->group(function () {
+Route::middleware(CheckAdmin::class)->group(function () {
    Route::get('/admindashboard', [AdminController::class, 'index'])->name('admin.dashboard');
-  
+   Route::resource('/subjects', SubjectController::class)->names('subject');
+   Route::resource('/shifts', ShiftController::class)->names('shift');
+   Route::resource('/sections', SectionController::class)->names('section');
+
 });
 
 Route::middleware(CheckStaff::class)->group(function () {

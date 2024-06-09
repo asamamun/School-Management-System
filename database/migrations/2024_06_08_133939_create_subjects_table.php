@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('subjects', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->unsignedInteger('code')->unique();
+            $table->enum('type', ['theory', 'practical'])->default('theory');
+            $table->enum('version', ['bangla', 'english'])->default('bangla');
+            $table->boolean('status')->default(1);
             $table->timestamps();
         });
     }

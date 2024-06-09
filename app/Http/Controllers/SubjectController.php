@@ -12,7 +12,9 @@ class SubjectController extends Controller
      */
     public function index()
     {
-        //
+        $subjects = Subject::all();
+
+        return view('academic.subjects', compact('subjects'));
     }
 
     /**
@@ -20,7 +22,10 @@ class SubjectController extends Controller
      */
     public function create()
     {
-        //
+        $types = ['theory', 'practical'];
+        $versions = ['bangla', 'english'];
+
+        return view('academic.subject-create', compact('types', 'versions'));
     }
 
     /**
@@ -29,6 +34,16 @@ class SubjectController extends Controller
     public function store(Request $request)
     {
         //
+        $validatedData = $request->validate([
+            'name' => 'required',
+            'code' => 'required|numeric|unique:subjects,code',
+            'type' => 'required|in:theory,practical',
+            'version' => 'required|in:bangla,english',
+            'status' => 'required|boolean',
+        ]);
+
+        Subject::create($validatedData);
+        return redirect()->route('subject.index')->with('success', 'Subject added successfully.');
     }
 
     /**
@@ -45,6 +60,8 @@ class SubjectController extends Controller
     public function edit(Subject $subject)
     {
         //
+        return view('academic.subject-edit', compact('subject'));
+
     }
 
     /**
@@ -60,6 +77,7 @@ class SubjectController extends Controller
      */
     public function destroy(Subject $subject)
     {
-        //
+        $subject->delete();
+        return redirect()->route('subject.index')->with('success', 'Subject deleted successfully.');
     }
 }

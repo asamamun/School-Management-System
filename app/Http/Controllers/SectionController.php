@@ -12,7 +12,9 @@ class SectionController extends Controller
      */
     public function index()
     {
-        //
+        $sections = Section::all();
+
+        return view('academic.sections', compact('sections'));
     }
 
     /**
@@ -20,7 +22,7 @@ class SectionController extends Controller
      */
     public function create()
     {
-        //
+        return view('academic.section-create');
     }
 
     /**
@@ -45,6 +47,7 @@ class SectionController extends Controller
     public function edit(Section $section)
     {
         //
+        return view('academic.section-edit', compact('section'));
     }
 
     /**

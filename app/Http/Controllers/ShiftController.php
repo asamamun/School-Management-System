@@ -12,7 +12,9 @@ class ShiftController extends Controller
      */
     public function index()
     {
-        //
+        $shifts = Shift::all();
+
+        return view('academic.shift', compact('shifts'));
     }
 
     /**
@@ -20,7 +22,7 @@ class ShiftController extends Controller
      */
     public function create()
     {
-        //
+        return view('academic.shift-create');
     }
 
     /**
@@ -44,7 +46,7 @@ class ShiftController extends Controller
      */
     public function edit(Shift $shift)
     {
-        //
+        return view('academic.shift-edit', compact('shift'));
     }
 
     /**
