@@ -1,21 +1,18 @@
 @extends('layouts.adminapp', ['title' => 'Admin | Section'])
 @section('content')
-    <div class="row">
-        <div class="form-group col-10">
-            <p>section create</p>
-        </div>
-        <div class="form-group col-2">
-            <a href="{{ url()->previous() }}" class="btn btn-secondary mb-3">
-                <i class="fas fa-chevron-left mr-1"></i>
-                Back
-            </a>
-        </div>
+    <div class="container">
+        <h2>Create New Section</h2>
+        <form action="{{ route('section.store') }}" method="POST">
+            @csrf
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" id="name" name="name" required>
+            </div>
+            <div class="form-group form-check">
+                <input type="checkbox" class="form-check-input" id="status" name="status" value="1" checked>
+                <label class="form-check-label" for="status">Status</label>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
     </div>
-    {{ html()->a() }}
-    {{ html()->form()->route('section.store')->open() }}
-
-    @include('academic.section-form')
-
-    {{ html()->submit('Submit')->class('btn btn-primary') }}
-    {{ html()->form()->close() }}
 @endsection

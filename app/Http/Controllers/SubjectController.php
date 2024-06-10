@@ -33,7 +33,6 @@ class SubjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
         $validatedData = $request->validate([
             'name' => 'required',
             'code' => 'required|numeric|unique:subjects,code',
@@ -59,9 +58,7 @@ class SubjectController extends Controller
      */
     public function edit(Subject $subject)
     {
-        //
         return view('academic.subject-edit', compact('subject'));
-
     }
 
     /**
@@ -69,7 +66,17 @@ class SubjectController extends Controller
      */
     public function update(Request $request, Subject $subject)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'code' => 'required|numeric|unique:subjects,code,' . $subject->id,
+            'type' => 'required|in:theory,practical',
+            'version' => 'required|in:bangla,english',
+            'status' => 'required|boolean',
+        ]);
+
+        $subject->update($validatedData);
+        // return redirect()->route('subjects.index')->with('success', 'Subject updated successfully.');
+        return redirect()->route('subject.index')->with('success', 'Subject updated successfully.');
     }
 
     /**

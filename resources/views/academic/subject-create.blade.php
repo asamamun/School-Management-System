@@ -11,7 +11,6 @@
         </a>
     </div>
 </div>
-{{-- {{ dd($versions)}} --}}
     <form action="{{ route('subject.store') }}" method="POST">
         @csrf
         <div class="form-group">

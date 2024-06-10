@@ -30,7 +30,17 @@ class ShiftController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'start_time' => 'required',
+            'end_time' => 'required',
+            'duration' => 'required|string',
+            'status' => 'required|string',
+        ]);
+
+        Shift::create($request->all());
+
+        return redirect()->route('shift.index')->with('success', 'Shift created successfully.');
     }
 
     /**
@@ -54,7 +64,17 @@ class ShiftController extends Controller
      */
     public function update(Request $request, Shift $shift)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'start_time' => 'required',
+            'end_time' => 'required',
+            'duration' => 'required|string',
+            'status' => 'required|string',
+        ]);
+
+        $shift->update($request->all());
+
+        return redirect()->route('shift.index')->with('success', 'Shift updated successfully.');
     }
 
     /**
@@ -62,6 +82,8 @@ class ShiftController extends Controller
      */
     public function destroy(Shift $shift)
     {
-        //
+        $shift->delete();
+
+        return redirect()->route('shift.index')->with('success', 'Shift deleted successfully.');
     }
 }

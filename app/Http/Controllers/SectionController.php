@@ -13,7 +13,6 @@ class SectionController extends Controller
     public function index()
     {
         $sections = Section::all();
-
         return view('academic.sections', compact('sections'));
     }
 
@@ -30,7 +29,17 @@ class SectionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'status' => 'required|boolean',
+        ]);
+
+        Section::create([
+            'name' => $request->name,
+            'status' => $request->status,
+        ]);
+
+        return redirect()->route('section.index')->with('success', 'Section created successfully.');
     }
 
     /**
@@ -46,7 +55,6 @@ class SectionController extends Controller
      */
     public function edit(Section $section)
     {
-        //
         return view('academic.section-edit', compact('section'));
     }
 
@@ -55,7 +63,17 @@ class SectionController extends Controller
      */
     public function update(Request $request, Section $section)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'status' => 'required|boolean',
+        ]);
+
+        $section->update([
+            'name' => $request->name,
+            'status' => $request->status,
+        ]);
+
+        return redirect()->route('section.index')->with('success', 'Section updated successfully.');
     }
 
     /**
@@ -63,6 +81,7 @@ class SectionController extends Controller
      */
     public function destroy(Section $section)
     {
-        //
+        $section->delete();
+        return redirect()->route('section.index')->with('success', 'Section deleted successfully.');
     }
 }
