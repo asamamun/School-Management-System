@@ -19,7 +19,7 @@ class SubjectFactory extends Factory
         return [
             'name' => fake()->word(),
             'code' => fake()->unique()->numberBetween(100, 999),
-            'status' => fake()->boolean(),
+            'status' => '1',
         ];
     }
 }

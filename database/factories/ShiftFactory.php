@@ -21,7 +21,7 @@ class ShiftFactory extends Factory
             'start_time' => fake()->time(),
             'end_time' => fake()->time(),
             'duration' => fake()->numberBetween(1,10),
-            'status' => fake()->boolean()
+            'status' => '1'
         ];
     }
 }

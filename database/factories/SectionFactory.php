@@ -18,7 +18,7 @@ class SectionFactory extends Factory
     {
         return [
             'name' => fake()->word(),
-            'status' => fake()->boolean()
+            'status' => '1'
         ];
     }
 }

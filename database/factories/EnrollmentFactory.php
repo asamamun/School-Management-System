@@ -2,6 +2,9 @@
 
 namespace Database\Factories;
 
+use App\Models\Enrollment;
+use App\Models\Standard;
+use App\Models\Student;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -9,6 +12,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class EnrollmentFactory extends Factory
 {
+    protected $model = Enrollment::class;
     /**
      * Define the model's default state.
      *
@@ -17,7 +21,9 @@ class EnrollmentFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'student_id' => Student::factory(),
+            'standard_id' => Standard::factory(),
+            'enrollment_date' => fake()->dateTimeBetween('2021-01-01', '2025-01-31')->format('Y-01-d'),
         ];
     }
 }

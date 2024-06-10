@@ -10,6 +10,31 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 class Student extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'admission_no',
+        'roll_no',
+        'first_name',
+        'last_name',
+        'mobile',
+        'email',
+        'user_id',
+        'standard_id',
+        'section_id',
+        'shift_id',
+        'dob',
+        'religion',
+        'gender',
+        'blood_group',
+        'admission_date',
+        'image',
+        'guardian_name',
+        'guardian_mobile',
+        'address',
+        'nationality',
+        'birth_certificate',
+        'status',
+    ];
+
     public function enrollment(): HasOne
     {
         return $this->hasOne(Enrollment::class);
@@ -18,5 +43,20 @@ class Student extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+    // Define relationships
+    public function standard()
+    {
+        return $this->belongsTo(Standard::class);
+    }
+
+    public function section()
+    {
+        return $this->belongsTo(Section::class);
+    }
+
+    public function shift()
+    {
+        return $this->belongsTo(Shift::class);
     }
 }
