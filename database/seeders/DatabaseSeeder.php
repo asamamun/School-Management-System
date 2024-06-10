@@ -42,8 +42,8 @@ class DatabaseSeeder extends Seeder
         // Create fixed shifts
         $shiftIds = [];
         foreach (['morning', 'day', 'night'] as $index => $shiftName) {
-            $start_time = $index === 0 ? '07am': ($index === 1 ? '12pm': '05pm');
-            $end_time = $index === 0 ? '12pm' : ($index === 1 ? '05pm' : '10pm');
+            $start_time = $index === 0 ? '07:00': ($index === 1 ? '12:00': '17:00');
+            $end_time = $index === 0 ? '12:00' : ($index === 1 ? '17:00' : '22:00');
             $shift = Shift::create([
                 'name' => $shiftName,
                 'start_time' => $start_time,
@@ -63,14 +63,14 @@ class DatabaseSeeder extends Seeder
         }
 
         // Create standards (classes)
-        foreach (['01', '02', '03', '04', '05'] as $className) {
+        foreach (['Class 01', 'Class 02', 'Class 03', 'Class 04', 'Class 05'] as $className) {
             Standard::create([
                 'name' => $className,
                 'session' => fake()->randomElement(['2020', '2021', '2022', '2023', '2024']),
                 'shift_id' => fake()->randomElement($shiftIds),
                 'section_id' => fake()->randomElement($sectionIds),
                 'user_id' => User::where('role', 'teacher')->inRandomOrder()->first()->id,
-                'version' => fake()->randomElement(['bangla', 'english']),
+                'version' => 'bangla',
             ]);
         }
 
