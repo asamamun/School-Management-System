@@ -18,7 +18,7 @@
                             Academic
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                         </a>
-                        <div class="collapse {{ Request::is('shift*') || Request::is('section*') || Request::is('subject*') ? 'show' : '' }}" id="Academic" aria-labelledby="headingOne"
+                        <div class="collapse {{ Request::is('shift*') || Request::is('section*') || Request::is('subject*') || Request::is('standards*') ? 'show' : '' }}" id="Academic" aria-labelledby="headingOne"
                             data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
                                 <a class="nav-link {{ Request::is('shift*') ? 'active fw-bold' : '' }}" href="{{ route('shift.index') }}">Shift</a>

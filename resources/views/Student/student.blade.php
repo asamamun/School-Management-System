@@ -41,7 +41,7 @@
                                 <a href="#" class="btn btn-sm btn-outline-primary">
                                     <i class="fa fa-eye"></i>
                                 </a>
-                                <a href="{{ route('student.user.create', $student->id) }}" class="btn btn-sm btn-outline-secondary"><i class="fa fa-plus"></i> </a>
+                                <a href="{{ route('studenttouser', $student->id) }}" class="btn btn-sm btn-outline-secondary"><i class="fa fa-plus"></i> </a>
 
 
                                 <form action="#" method="post">
@@ -57,6 +57,6 @@
                 @endforeach
             </tbody>
         </table>
-
+        {{ $students->links() }}
     </div>
 @endsection

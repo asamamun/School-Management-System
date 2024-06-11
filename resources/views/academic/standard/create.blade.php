@@ -10,7 +10,7 @@
                 <input type="text" class="form-control" id="name" name="name" required>
             </div>
             <div class="mb-3">
-                <label for="user_id" class="form-label">User ID</label>
+                <label for="user_id" class="form-label">Class Teacher</label>
                 <select class="form-select" id="user_id" name="user_id" required>
                     <option value="">Select User</option>
                     @foreach ($users as $user)
@@ -20,10 +20,11 @@
             </div>
             <div class="mb-3">
                 <label for="session" class="form-label">Session</label>
-                <input type="text" class="form-control" id="session" name="session" required>
+                <input type="number" name="" id="" value="{{ date('Y') }}" class="form-control">
+                {{-- <input type="text" class="form-control" id="session" name="session" required> --}}
             </div>
             <div class="mb-3">
-                <label for="shift_id" class="form-label">Shift ID</label>
+                <label for="shift_id" class="form-label">Shift</label>
                 <select class="form-select" id="shift_id" name="shift_id" required>
                     <option value="">Select Shift</option>
                     @foreach ($shifts as $shift)
@@ -32,7 +33,7 @@
                 </select>
             </div>
             <div class="mb-3">
-                <label for="section_id" class="form-label">Section ID</label>
+                <label for="section_id" class="form-label">Section </label>
                 <select class="form-select" id="section_id" name="section_id" required>
                     <option value="">Select Section</option>
                     @foreach ($sections as $section)

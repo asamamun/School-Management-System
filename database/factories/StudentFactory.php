@@ -41,7 +41,6 @@ class StudentFactory extends Factory
             'address' => fake()->address,
             'nationality' => fake()->country,
             'birth_certificate' => fake()->unique()->numerify('###########'),
-            'status' => 'active',
         ];
     }
 }

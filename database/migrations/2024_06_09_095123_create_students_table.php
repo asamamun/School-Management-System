@@ -43,7 +43,7 @@ return new class extends Migration
             $table->string('address')->required();
             $table->string('nationality')->required();
             $table->string('birth_certificate')->nullable();
-            $table->set('status', ['active', 'inactive'])->required();
+            // $table->set('status', ['active', 'inactive'])->required();
             $table->timestamps();
         });
     }

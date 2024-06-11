@@ -25,7 +25,7 @@ class StandardController extends Controller
      */
     public function create()
     {
-        $users = User::all();
+        $users = User::where('role', 'teacher')->get();
         $shifts = Shift::all();
         $sections = Section::all();
 
