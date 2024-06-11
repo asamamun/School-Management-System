@@ -44,5 +44,13 @@ class Standard extends Model
     {
         return $this->hasMany(Enrollment::class);
     }
+    public function attendences(): HasMany
+    {
+        return $this->hasMany(Attendance::class);
+    }
+    public function feesAssigns(): HasMany
+    {
+        return $this->hasMany(FeesAssign::class);
+    }
 
 }

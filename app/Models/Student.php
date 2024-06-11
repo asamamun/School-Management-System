@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Student extends Model
@@ -58,5 +59,13 @@ class Student extends Model
     public function shift()
     {
         return $this->belongsTo(Shift::class);
+    }
+    public function attendances(): HasMany
+    {
+        return $this->hasMany(Attendance::class);
+    }
+    public function feesAssigns(): HasMany
+    {
+        return $this->hasMany(FeesAssign::class);
     }
 }

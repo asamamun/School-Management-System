@@ -1,0 +1,13 @@
+Relations
+________________________
+# standards (one to many) attendences
+# students (one to many) attendences
+
+# fees_groups (one to many) fees_masters
+# fees_types (one to one) fees_masters
+
+# students (one to many) fees_assings
+# standrds (one to many) fees_assings
+# fees_masters (one to many) fees_assings
+
+# fees_assings (one to many) fees_collects
