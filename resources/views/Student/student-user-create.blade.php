@@ -4,14 +4,14 @@
         <h2>Create Student User</h2>
         <form action="{{ route('student.user.store') }}" method="POST">
             @csrf
-            <div class="form-group">
+            {{-- <div class="form-group">
                 <label for="student_id">Student</label>
                 <select class="form-control" id="student_id" name="student_id" required>
                     @foreach ($students as $id => $name)
                         <option value="{{ $id }}">{{ $name }}</option>
                     @endforeach
                 </select>
-            </div>
+            </div> --}}
             <div class="form-group">
                 <label for="name">Name</label>
                 <input type="text" class="form-control" id="name" name="name" value="{{ old('name') }}" required>
