@@ -24,6 +24,7 @@
                                 <a class="nav-link {{ Request::is('shift*') ? 'active fw-bold' : '' }}" href="{{ route('shift.index') }}">Shift</a>
                                 <a class="nav-link {{ Request::is('section*') ? 'active fw-bold' : '' }}" href="{{ route('section.index') }}">Section</a>
                                 <a class="nav-link {{ Request::is('subject*') ? 'active fw-bold' : '' }}" href="{{ route('subject.index') }}">Subject</a>
+                                <a class="nav-link {{ Request::is('standards*') ? 'active fw-bold' : '' }}" href="{{ route('standards.index') }}">Standards</a>
                             </nav>
                         </div>
                     @endif

@@ -10,6 +10,16 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Standard extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'name',
+        'user_id',
+        'session',
+        'shift_id',
+        'section_id',
+        'version',
+        'status'
+    ];
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);

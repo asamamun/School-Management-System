@@ -25,6 +25,7 @@ return new class extends Migration
             $table->bigInteger('section_id')->unsigned()->nullable();
             $table->foreign('section_id')->references('id')->on('sections')->onDelete('restrict');
             $table->set('version',['bangla','english'])->default('bangla');    
+            $table->set('status',['active','inactive'])->default('active');
             $table->timestamps();
         });
     }
