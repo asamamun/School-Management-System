@@ -5,6 +5,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SectionController;
 use App\Http\Controllers\ShiftController;
 use App\Http\Controllers\StandardController;
+use App\Http\Controllers\StudentController;
 use App\Http\Controllers\StudentUserController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\TeacherController;
@@ -53,6 +54,7 @@ Route::middleware(CheckAdmin::class)->group(function () {
    Route::resource('/shifts', ShiftController::class)->names('shift');
    Route::resource('/sections', SectionController::class)->names('section');
    Route::resource('/standards', StandardController::class)->names('standards');
+   Route::resource('/students', StudentController::class)->names('student');
    Route::resource('/studentsusers', StudentUserController::class)->names('student.user');
 
 });
