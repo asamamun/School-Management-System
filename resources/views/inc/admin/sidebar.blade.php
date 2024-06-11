@@ -31,19 +31,20 @@
                 @endauth
                 {{-- Student --}}
                 <div class="sb-sidenav-menu-heading">Student</div>
-                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#Student"
-                            aria-expanded="false" aria-controls="collapseLayouts">
-                            <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                            Admission
-                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                        </a>
-                <div class="collapse" id="Student" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                    <nav class="sb-sidenav-menu-nested nav">
-                        <a class="nav-link" href="{{ route('shift.index') }}">Enrollment</a>
-                        <a class="nav-link" href="{{ route('section.index') }}">Section</a>
-                        <a class="nav-link" href="{{ route('subject.index') }}">Subject</a>
-                    </nav>
-                </div>
+                <a class="nav-link collapsed {{ Request::is('student*') || Request::is('shift*') || Request::is('section*') || Request::is('subject*') ? 'fw-bold' : '' }}" href="#" data-bs-toggle="collapse" data-bs-target="#Student"
+                aria-expanded="false" aria-controls="collapseLayouts">
+                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                Admission
+                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+            </a>
+    <div class="collapse {{ Request::is('student*') ||  Request::is('shift*') || Request::is('section*') || Request::is('subject*') ? 'show' : '' }}" id="Student" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+        <nav class="sb-sidenav-menu-nested nav">
+            <a class="nav-link {{ Request::is('student*') ? 'active fw-bold' : '' }}" href="{{ route('student.index') }}">Studen Info</a>
+            <a class="nav-link {{ Request::is('shift*') ? 'active fw-bold' : '' }}" href="{{ route('shift.index') }}">Enrollment</a>
+            <a class="nav-link {{ Request::is('shift*') ? 'active fw-bold' : '' }}" href="{{ route('section.index') }}">Section</a>
+            <a class="nav-link {{ Request::is('shift*') ? 'active fw-bold' : '' }}" href="{{ route('subject.index') }}">Subject</a>
+        </nav>
+    </div>
 
 
                 {{-- Interface --}}
