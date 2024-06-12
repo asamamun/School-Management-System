@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Enrollment;
+use App\Models\Shift;
+use App\Models\Standard;
+use App\Models\Student;
 use Illuminate\Http\Request;
 
 class EnrollmentController extends Controller
@@ -12,7 +15,8 @@ class EnrollmentController extends Controller
      */
     public function index()
     {
-        //
+        
+        return view('academic.enrollment.index');
     }
 
     /**
@@ -20,7 +24,9 @@ class EnrollmentController extends Controller
      */
     public function create()
     {
-        //
+        $standards = Standard::pluck('name','id');
+        $students = Student::all();
+        return view('academic.enrollment.create', compact('standards', 'students'));
     }
 
     /**
@@ -44,7 +50,7 @@ class EnrollmentController extends Controller
      */
     public function edit(Enrollment $enrollment)
     {
-        //
+        return view('academic.enrollment.edit', compact('enrollment'));
     }
 
     /**

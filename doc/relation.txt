@@ -1,7 +1,7 @@
 Relations
 ________________________
-# standards (one to many) attendences
-# students (one to many) attendences
+# standards (one to many) attendances
+# students (one to many) attendances
 
 # fees_groups (one to many) fees_masters
 # fees_types (one to one) fees_masters

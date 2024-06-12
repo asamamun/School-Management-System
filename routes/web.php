@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\EnrollmentController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SectionController;
 use App\Http\Controllers\ShiftController;
@@ -56,6 +57,7 @@ Route::middleware(CheckAdmin::class)->group(function () {
    Route::resource('/sections', SectionController::class)->names('section');
    Route::resource('/standards', StandardController::class)->names('standards');
    Route::resource('/students', StudentController::class)->names('student');
+   Route::resource('/enrollments', EnrollmentController::class)->names('enrollment');
    Route::get('/studenttouser/{id}/create', [StudentToUserController::class, 'createUserFromStudent'])->name('studenttouser');
 
 

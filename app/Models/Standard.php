@@ -44,7 +44,7 @@ class Standard extends Model
     {
         return $this->hasMany(Enrollment::class);
     }
-    public function attendences(): HasMany
+    public function attendances(): HasMany
     {
         return $this->hasMany(Attendance::class);
     }
