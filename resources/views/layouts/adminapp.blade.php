@@ -28,8 +28,8 @@
         <div id="layoutSidenav_content">
             <main>
                 <div class="container-fluid px-4">
-                    @include(inc.flash)
-                    @include(inc.error)
+                    @include('inc.flash')
+                    @include('inc.error')
 
                     {{-- content --}}
                     @yield('content')
