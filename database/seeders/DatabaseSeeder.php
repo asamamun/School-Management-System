@@ -80,6 +80,8 @@ class DatabaseSeeder extends Seeder
        // Call StudentSeeder to handle students and enrollments
        $this->call(StudentSeeder::class);
     }
+
+    
 }
 
 

@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class FeesAssign extends Model
 {
@@ -22,8 +23,8 @@ class FeesAssign extends Model
     {
         return $this->belongsTo(FeesMaster::class);
     }
-    public function feesCollects(): HasMany
+    public function feesCollect(): HasOne
     {
-        return $this->hasMany(FeesCollect::class);
+        return $this->hasOne(FeesCollect::class);
     }
 }

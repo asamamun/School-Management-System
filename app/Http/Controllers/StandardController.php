@@ -40,7 +40,7 @@ class StandardController extends Controller
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'user_id' => ['required', 'integer'],
-            'session' => ['required', 'string', 'max:255'],
+            'session' => ['required', 'integer'],
             'shift_id' => ['required', 'integer'],
             'section_id' => ['required', 'integer'],
             'version' => [

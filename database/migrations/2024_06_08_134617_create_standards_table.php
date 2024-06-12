@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('name')->notNull();
             $table->bigInteger('user_id')->unsigned()->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->string('session')->notNull();
+            $table->bigInteger('session')->notNull();
             $table->bigInteger('shift_id')->unsigned()->nullable();
             $table->foreign('shift_id')->references('id')->on('shifts')->onDelete('restrict');
             //section id

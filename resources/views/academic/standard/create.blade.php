@@ -20,7 +20,7 @@
             </div>
             <div class="mb-3">
                 <label for="session" class="form-label">Session</label>
-                <input type="number" name="" id="" value="{{ date('Y') }}" class="form-control">
+                <input type="number" name="session" id="" value="{{ date('Y') }}" class="form-control">
                 {{-- <input type="text" class="form-control" id="session" name="session" required> --}}
             </div>
             <div class="mb-3">

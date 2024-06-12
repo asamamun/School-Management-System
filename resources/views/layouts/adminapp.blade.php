@@ -4,7 +4,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="csrf-token" content="{{ csrf_token() }}" id="token">
+    {{-- <meta name="csrf-token" content="<?php //echo csrf_token(); ?>" id="token"> --}}
+    
 
     <title>{{ $title ?? config('app.name', 'Laravel') }}</title>
 
@@ -54,6 +56,18 @@
     <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"
         crossorigin="anonymous"></script>
     <script src="{{ asset('assets/admin/js/datatables-simple-demo.js') }}"></script>
+    <script src="{{asset('assets/js/jquery-3.7.1.min.js')}}"></script>
+    <script src="{{asset('assets/js/lightbox.min.js')}}"></script>
+    <script>
+        $(document).ready(function() {
+          $.ajaxSetup({
+          headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          }
+});
+
+        })
+    </script>
 
     {{-- extra  --}}
     @yield('script')
