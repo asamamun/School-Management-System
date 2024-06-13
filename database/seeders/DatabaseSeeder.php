@@ -18,8 +18,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-         // Create fixed users
-         foreach (['admin', 'staff', 'teacher', 'student'] as $name) {
+        // Create fixed users
+        foreach (['admin', 'staff', 'teacher', 'student'] as $name) {
             User::factory()->create([
                 'name' => $name,
                 'email' => $name . "@gmail.com",
@@ -27,7 +27,7 @@ class DatabaseSeeder extends Seeder
                 'password' => bcrypt($name . "12345"),
             ]);
         }
-        
+
         // Create 15 teachers
         foreach (range(1, 15) as $index) {
             $name = "teacher{$index}";
@@ -42,7 +42,7 @@ class DatabaseSeeder extends Seeder
         // Create fixed shifts
         $shiftIds = [];
         foreach (['morning', 'day', 'night'] as $index => $shiftName) {
-            $start_time = $index === 0 ? '07:00': ($index === 1 ? '12:00': '17:00');
+            $start_time = $index === 0 ? '07:00' : ($index === 1 ? '12:00' : '17:00');
             $end_time = $index === 0 ? '12:00' : ($index === 1 ? '17:00' : '22:00');
             $shift = Shift::create([
                 'name' => $shiftName,
@@ -77,11 +77,13 @@ class DatabaseSeeder extends Seeder
         // Create 10 subjects
         Subject::factory(10)->create();
 
-       // Call StudentSeeder to handle students and enrollments
-       $this->call(StudentSeeder::class);
+        // Call StudentSeeder to handle students and enrollments
+        $this->call(
+            [
+                StudentSeeder::class,
+               // EnrollmentSeeder::class,
+                //FeesTypeSeeder::class,
+            ]
+        );
     }
-
-    
 }
-
-

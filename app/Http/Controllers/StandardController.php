@@ -126,4 +126,13 @@ class StandardController extends Controller
         $standard->delete();
         return redirect()->route('standards.index')->with('success', 'Standard deleted successfully.');
     }
+
+    public function getStandards(Request $request)
+    {
+        $standards = Standard::
+        where('shift_id', $request->shift_id)
+        ->where('status', 'active')
+        ->pluck('name','id');
+        return response()->json($standards);
+    }
 }

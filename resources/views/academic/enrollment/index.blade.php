@@ -19,9 +19,9 @@
                     <div class="input-group mb-3 ">
                         <label for="shift_id" class="input-group-text">Shift</label>
                         <select name="shift_id" id="shift_id" class="form-select">
-                            <option value="">Select Shift</option>
-                            @foreach ($standards as $standard)
-                                <option value="{{ $standard->shift->id }}">{{ $standard->shift->name }}</option>
+                            <option value="-1">Select Shift</option>
+                            @foreach ($shifts as $shift)
+                                <option value="{{ $shift->id }}">{{ $shift->name }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -30,10 +30,7 @@
                     <div class="input-group mb-3 ">
                         <label for="standard_id" class="input-group-text">Standards</label>
                         <select name="standard_id" id="standard_id" class="form-select">
-                            <option value="">Select Standard</option>
-                            @foreach ($standards as $standard)
-                                <option value="{{ $standard->id }}">{{ $standard->name }}</option>
-                            @endforeach
+                            <option value="-1">Select Standard</option>                            
                         </select>
                     </div>
                 </div>
@@ -41,17 +38,14 @@
                     <div class="input-group mb-3 ">
                         <label for="section_id" class="input-group-text">Section</label>
                         <select name="section_id" id="section_id" class="form-select">
-                            <option value="">Select Section</option>
-                            @foreach ($standards as $standard)
-                                <option value="{{ $standard->section->id }}">{{ $standard->section->name }}</option>
-                            @endforeach
+                            <option value="-1">Select Section</option>                            
                         </select>
                     </div>
                 </div>
                 <div class="col-3">
                     <div class="input-group mb-3">
                         <label for="search" class="input-group-text"><i class="fa fa-search"></i></label>
-                        <button type="submit" class="btn btn-primary">Search</button>
+                        <button type="button" id="searchBtn" class="btn btn-primary">Search</button>
                     </div>
                 </div>
 
@@ -77,4 +71,51 @@
             </thead>
         </table>
     </div>
+@endsection
+@section('script')
+    <script>
+        $(document).ready(function () {
+            $("#shift_id").change(function () {
+                let id = $(this).val();
+                console.log(id);
+                $.get("{{ route('standatd.getStandardFromShift' ) }}", {
+                    shift_id: id
+                }, function (data) {
+                    console.log(data);
+                    let options = `<option value='-1'>Select Section</option>`;
+                        for (const key in data) {
+                            options += `<option value="${key}">${data[key]}</option>`;
+                        }                        
+                        $("#standard_id").html(options);
+
+                })
+            });
+
+
+
+            $("#searchBtn").click(function () {
+                alert("hello");
+                var shift_id = $("#shift_id").val();
+                var standard_id = $("#standard_id").val();
+                var section_id = $("#section_id").val();
+                // var url = "{{ route('enrollment.search') }}?shift_id=" + shift_id + "&standard_id=" + standard_id + "&section_id=" + section_id;
+                // window.location.href = url;
+                var data = {
+                    shift_id: shift_id,
+                    standard_id: standard_id,
+                    section_id: section_id
+                };
+                // console.log(data);
+                var URL = "{{ route('enrollment.search') }}";
+                $.post(URL, data,
+                    function (data, textStatus, jqXHR) {
+                        console.log(data);
+                        //for in loop
+                        
+                    },
+                    "dataType"
+                );
+            });
+        });
+    </script>
 @endsection

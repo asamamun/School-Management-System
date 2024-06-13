@@ -15,8 +15,9 @@ class EnrollmentController extends Controller
      */
     public function index()
     {
-        $standards = Standard::with('shift' , 'section')->get();
-        return view('academic.enrollment.index', compact('standards'));
+        $shifts = Shift::all();
+        // $standards = Standard::with('section')->get();
+        return view('academic.enrollment.index', compact('shifts'));
     }
 
     /**
@@ -67,5 +68,14 @@ class EnrollmentController extends Controller
     public function destroy(Enrollment $enrollment)
     {
         //
+    }
+
+    public function search(Request $request)
+    {
+        $students = Student::
+        where('name', 'like', '%' . $request->search . '%')
+        ->get();
+        // return $students;
+        return response()->json($request->all());
     }
 }
