@@ -12,7 +12,7 @@ class FeesCollectController extends Controller
      */
     public function index()
     {
-        //
+        return view('fees.collect.index');
     }
 
     /**

@@ -15,8 +15,8 @@ class EnrollmentController extends Controller
      */
     public function index()
     {
-        
-        return view('academic.enrollment.index');
+        $standards = Standard::with('shift' , 'section')->get();
+        return view('academic.enrollment.index', compact('standards'));
     }
 
     /**

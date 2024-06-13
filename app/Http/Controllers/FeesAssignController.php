@@ -12,7 +12,8 @@ class FeesAssignController extends Controller
      */
     public function index()
     {
-        //
+        $feesassigns = FeesAssign::with(['standard', 'student'])->paginate(10);
+        return view('fees.assign.index', compact('feesassigns'));
     }
 
     /**

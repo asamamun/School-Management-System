@@ -2,6 +2,11 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\EnrollmentController;
+use App\Http\Controllers\FeesAssignController;
+use App\Http\Controllers\FeesCollectController;
+use App\Http\Controllers\FeesGroupController;
+use App\Http\Controllers\FeesMasterController;
+use App\Http\Controllers\FeesTypeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SectionController;
 use App\Http\Controllers\ShiftController;
@@ -59,7 +64,11 @@ Route::middleware(CheckAdmin::class)->group(function () {
    Route::resource('/students', StudentController::class)->names('student');
    Route::resource('/enrollments', EnrollmentController::class)->names('enrollment');
    Route::get('/studenttouser/{id}/create', [StudentToUserController::class, 'createUserFromStudent'])->name('studenttouser');
-
+   Route::resource('/feegroups', FeesGroupController::class)->names('feegroup');
+   Route::resource('/feetypes', FeesTypeController::class)->names('feetype');
+   Route::resource('/feemasters', FeesMasterController::class)->names('feemaster');
+   Route::resource('/feeassigns', FeesAssignController::class)->names('feeassign');
+   Route::resource('/feecollects', FeesCollectController::class)->names('feecollect');
 
 });
 

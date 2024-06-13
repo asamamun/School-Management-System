@@ -12,7 +12,7 @@ class FeesGroupController extends Controller
      */
     public function index()
     {
-        //
+        return view('fees.group.index');
     }
 
     /**

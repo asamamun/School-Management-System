@@ -11,6 +11,16 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 class FeesAssign extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'fees_group_id',
+        'fees_type_id',
+        'duedate',
+        'amount',
+        'fine_type',
+        'fine_amount',
+        'fine_percentage',
+        'status',
+    ];
     public function standard(): BelongsTo
     {
         return $this->belongsTo(Standard::class);

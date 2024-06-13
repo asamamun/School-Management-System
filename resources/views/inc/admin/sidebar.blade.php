@@ -12,40 +12,76 @@
                     @if (Auth::user()->role == 'admin')
                         {{-- Setting --}}
                         <div class="sb-sidenav-menu-heading">Setting</div>
-                        <a class="nav-link collapsed {{ Request::is('shift*') || Request::is('section*') || Request::is('subject*') ? 'fw-bold' : '' }}" href="#" data-bs-toggle="collapse" data-bs-target="#Academic"
-                            aria-expanded="false" aria-controls="collapseLayouts">
+                        <a class="nav-link collapsed {{ Request::is('shift*') || Request::is('section*') || Request::is('subject*') ? 'fw-bold' : '' }}"
+                            href="#" data-bs-toggle="collapse" data-bs-target="#Academic" aria-expanded="false"
+                            aria-controls="collapseLayouts">
                             <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                             Academic
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                         </a>
-                        <div class="collapse {{ Request::is('shift*') || Request::is('section*') || Request::is('subject*') || Request::is('standards*') ? 'show' : '' }}" id="Academic" aria-labelledby="headingOne"
-                            data-bs-parent="#sidenavAccordion">
+                        <div class="collapse {{ Request::is('shift*') || Request::is('section*') || Request::is('subject*') || Request::is('standards*') ? 'show' : '' }}"
+                            id="Academic" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link {{ Request::is('shift*') ? 'active fw-bold' : '' }}" href="{{ route('shift.index') }}">Shift</a>
-                                <a class="nav-link {{ Request::is('section*') ? 'active fw-bold' : '' }}" href="{{ route('section.index') }}">Section</a>
-                                <a class="nav-link {{ Request::is('subject*') ? 'active fw-bold' : '' }}" href="{{ route('subject.index') }}">Subject</a>
-                                <a class="nav-link {{ Request::is('standards*') ? 'active fw-bold' : '' }}" href="{{ route('standards.index') }}">Standards</a>
+                                <a class="nav-link {{ Request::is('shift*') ? 'active fw-bold' : '' }}"
+                                    href="{{ route('shift.index') }}">Shift</a>
+                                <a class="nav-link {{ Request::is('section*') ? 'active fw-bold' : '' }}"
+                                    href="{{ route('section.index') }}">Section</a>
+                                <a class="nav-link {{ Request::is('subject*') ? 'active fw-bold' : '' }}"
+                                    href="{{ route('subject.index') }}">Subject</a>
+                                <a class="nav-link {{ Request::is('standards*') ? 'active fw-bold' : '' }}"
+                                    href="{{ route('standards.index') }}">Standards</a>
                             </nav>
                         </div>
                     @endif
                 @endauth
                 {{-- Student --}}
-                <div class="sb-sidenav-menu-heading">Student</div>
-                <a class="nav-link collapsed {{ Request::is('student*') || Request::is('shift*') || Request::is('section*') || Request::is('subject*') ? 'fw-bold' : '' }}" href="#" data-bs-toggle="collapse" data-bs-target="#Student"
-                aria-expanded="false" aria-controls="collapseLayouts">
-                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                Admission
-                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-            </a>
-    <div class="collapse {{ Request::is('student*') ||  Request::is('shift*') || Request::is('section*') || Request::is('subject*') ? 'show' : '' }}" id="Student" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-        <nav class="sb-sidenav-menu-nested nav">
-            <a class="nav-link {{ Request::is('student*') ? 'active fw-bold' : '' }}" href="{{ route('student.index') }}">Studen Info</a>
-            <a class="nav-link {{ Request::is('shift*') ? 'active fw-bold' : '' }}" href="{{ route('shift.index') }}">Enrollment</a>
-            <a class="nav-link {{ Request::is('shift*') ? 'active fw-bold' : '' }}" href="{{ route('section.index') }}">Section</a>
-            <a class="nav-link {{ Request::is('shift*') ? 'active fw-bold' : '' }}" href="{{ route('subject.index') }}">Subject</a>
-        </nav>
-    </div>
+                {{-- <div class="sb-sidenav-menu-heading">Student</div> --}}
+                <a class="nav-link collapsed {{ Request::is('student*') || Request::is('shift*') || Request::is('section*') || Request::is('subject*') ? 'fw-bold' : '' }}"
+                    href="#" data-bs-toggle="collapse" data-bs-target="#Student" aria-expanded="false"
+                    aria-controls="collapseLayouts">
+                    <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                    Admission
+                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                </a>
+                <div class="collapse {{ Request::is('student*') || Request::is('enrollment*') ? 'show' : '' }}"
+                    id="Student" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                    <nav class="sb-sidenav-menu-nested nav">
+                        <a class="nav-link {{ Request::is('student*') ? 'active fw-bold' : '' }}"
+                            href="{{ route('student.index') }}">Studen Info</a>
+                        <a class="nav-link {{ Request::is('enrollment*') ? 'active fw-bold' : '' }}"
+                            href="{{ route('enrollment.index') }}">Enrollment</a>
+                        {{-- <a class="nav-link {{ Request::is('shift*') ? 'active fw-bold' : '' }}"
+                            href="{{ route('section.index') }}">Section</a>
+                        <a class="nav-link {{ Request::is('shift*') ? 'active fw-bold' : '' }}"
+                            href="{{ route('subject.index') }}">Subject</a> --}}
+                    </nav>
+                </div>
 
+                {{-- Fees --}}
+
+                {{-- <div class="sb-sidenav-menu-heading">Fees</div> --}}
+                <a class="nav-link collapsed {{ Request::is('feegroup*') || Request::is('feetype*') || Request::is('feemaster*') || Request::is('feeassign*') || Request::is('feecollect*') ? 'fw-bold' : '' }}"
+                    href="#" data-bs-toggle="collapse" data-bs-target="#Fee" aria-expanded="false"
+                    aria-controls="collapseLayouts">
+                    <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                    Fees
+                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                </a>
+                <div class="collapse {{ Request::is('feegroup*') || Request::is('feetype*') || Request::is('feemaster*') || Request::is('feeassign*') || Request::is('feecollect*') ? 'show' : '' }}"
+                    id="Fee" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                    <nav class="sb-sidenav-menu-nested nav">
+                        <a class="nav-link {{ Request::is('feegroup*') ? 'active fw-bold' : '' }}"
+                            href="{{ route('feegroup.index') }}">Group</a>
+                        <a class="nav-link {{ Request::is('feetype*') ? 'active fw-bold' : '' }}"
+                            href="{{ route('feetype.index') }}">Type</a>
+                        <a class="nav-link {{ Request::is('feemaster*') ? 'active fw-bold' : '' }}"
+                            href="{{ route('feemaster.index') }}">Master</a>
+                        <a class="nav-link {{ Request::is('feeassign*') ? 'active fw-bold' : '' }}"
+                            href="{{ route('feeassign.index') }}">Assign</a>
+                        <a class="nav-link {{ Request::is('feecollect*') ? 'active fw-bold' : '' }}"
+                            href="{{ route('feecollect.index') }}">Collect</a>
+                    </nav>
+                </div>
 
                 {{-- Interface --}}
                 {{-- <div class="sb-sidenav-menu-heading">Interface</div>

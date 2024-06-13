@@ -12,7 +12,7 @@ class FeesTypeController extends Controller
      */
     public function index()
     {
-        //
+        return view('fees.type.index');
     }
 
     /**

@@ -9,6 +9,12 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 class FeesType extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'name',
+        'code',
+        'description',
+        'status',
+    ];
     public function feesMaster(): HasOne
     {
         return $this->hasOne(FeesMaster::class);

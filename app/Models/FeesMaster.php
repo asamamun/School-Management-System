@@ -10,6 +10,18 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class FeesMaster extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'fees_group_id',
+        'fees_type_id',
+        'duedate',
+        'amount',
+        'fine_type',
+        'fine_amount',
+        'fine_percentage',
+        'status',
+    ];
+
+   
     public function feesType(): BelongsTo
     {
         return $this->belongsTo(FeesType::class);

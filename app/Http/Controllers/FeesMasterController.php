@@ -12,7 +12,8 @@ class FeesMasterController extends Controller
      */
     public function index()
     {
-        //
+       $feesmaster = FeesMaster::all();
+       return view('fees.master.index',compact('feesmaster'));
     }
 
     /**
