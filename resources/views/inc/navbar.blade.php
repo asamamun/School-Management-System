@@ -19,6 +19,9 @@
           {{-- <li class="nav-item">
             <a class="nav-link text-white" href="{{ route('dashboard') }}">Dashboard |</a>
           </li> --}}
+          <li class="nav-item">
+            <a style="font-size: 1.0rem; color: white" class="nav-link btn btn-outline-success" href="{{ route('admission') }}">{{ __('Admission') }} |</a>
+          </li>
         <li class="nav-item">
         @if (Route::has('login') && Route::has('logout'))
           @auth

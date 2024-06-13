@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AdmissionController;
 use App\Http\Controllers\EnrollmentController;
 use App\Http\Controllers\FeesAssignController;
 use App\Http\Controllers\FeesCollectController;
@@ -27,7 +28,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-
+Route::get('/admission', [AdmissionController::class, 'index'])->name('admission');
+Route::post('/admission', [AdmissionController::class, 'store'])->name('admission.store');
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
 // })->middleware(['auth', 'verified'])->name('dashboard');

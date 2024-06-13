@@ -43,7 +43,8 @@ return new class extends Migration
             $table->string('address')->required();
             $table->string('nationality')->required();
             $table->string('birth_certificate')->nullable();
-            // $table->set('status', ['active', 'inactive'])->required();
+            $table->set('admission_status', ['applied','assigned','canceled'])->default('applied');
+            $table->set('status', ['active','inactive'])->default('active');
             $table->timestamps();
         });
     }
