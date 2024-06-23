@@ -97,11 +97,13 @@
 
             $("#shift_id").change(function() {
                 let id = $(this).val();
+                let session = $("#session").val();
                 $.ajax({
                     type: "POST",
                     url: "{{ route('standatd.getStandardFromShift') }}",
                     data: {
-                        shift_id: id
+                        shift_id: id,
+                        session : session,
                     },
                     success: function(data) {
                         let options = '<option value="-1">Select...</option>';
@@ -135,11 +137,8 @@
                     url: "{{ route('enrollment.search') }}",
                     data: data,
                     success: function(data) {
-                        // console.log(data);
                         let html = '';
                         $.each(data, function(key, value) {
-                            // console.log(key);
-                            // console.log(value);
                             html += '<tr>';
                             html += '<td>' + value.first_name + ' ' + value.last_name + '</td>';
                             html += '<td>' + value.roll_no + '</td>';

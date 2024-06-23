@@ -92,6 +92,7 @@ class EnrollmentController extends Controller
     {
         $standards = Standard::
         where('shift_id', $request->shift_id)
+        ->where('session', $request->session)
         ->where('status', 'active')
         ->pluck('name','id');
         return response()->json($standards);
