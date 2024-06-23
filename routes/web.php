@@ -72,7 +72,9 @@ Route::middleware(CheckAdmin::class)->group(function () {
    Route::resource('/feeassigns', FeesAssignController::class)->names('feeassign');
    Route::resource('/feecollects', FeesCollectController::class)->names('feecollect');
    Route::post('/enrollments/search', [EnrollmentController::class, 'search'])->name('enrollment.search');
-   Route::get('/getstandardsfromshift', [StandardController::class, 'getStandards'])->name('standatd.getStandardFromShift');
+   Route::post('/getstandardsfromshift', [EnrollmentController::class, 'getStandards'])->name('standatd.getStandardFromShift');
+   Route::post('/getsectionsfromstandard', [EnrollmentController::class, 'getSections'])->name('standatd.getSectionsFromStandard');
+   Route::post('/getshiftsfromsession', [EnrollmentController::class, 'getShifts'])->name('standatd.getShiftsFromSession');
 
 });
 

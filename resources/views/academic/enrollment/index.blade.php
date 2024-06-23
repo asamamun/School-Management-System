@@ -14,31 +14,32 @@
     <div class="container mt-3">
         <form action="" method="post" class="">
             @csrf
+            {{-- go to standard  --}}
             <div class="row">
-                <div class="col-3">
-                    <div class="input-group mb-3 ">
-                        <label for="shift_id" class="input-group-text">Shift</label>
-                        <select name="shift_id" id="shift_id" class="form-select">
-                            <option value="-1">Select Shift</option>
-                            @foreach ($shifts as $shift)
-                                <option value="{{ $shift->id }}">{{ $shift->name }}</option>
+                <div class="col">
+                    <div class="input-group mb-3">
+                        <label for="Session" class="input-group-text">Session</label>
+                        <select name="session" id="session" class="form-control">
+                            <option value="">Select...</option>
+                            @foreach ($sessions as $session)
+                                <option value="{{ $session }}">{{ $session }}</option>
                             @endforeach
                         </select>
                     </div>
                 </div>
-                <div class="col-3">
-                    <div class="input-group mb-3 ">
-                        <label for="standard_id" class="input-group-text">Standards</label>
-                        <select name="standard_id" id="standard_id" class="form-select">
-                            <option value="-1">Select Standard</option>                            
+                <div class="col">
+                    <div class="input-group mb-3">
+                        <label for="shift_id" class="input-group-text">Shift</label>
+                        <select name="shift" id="shift_id" class="form-control">
+                            <option value="-1">Select...</option>
                         </select>
                     </div>
                 </div>
-                <div class="col-3">
-                    <div class="input-group mb-3 ">
-                        <label for="section_id" class="input-group-text">Section</label>
-                        <select name="section_id" id="section_id" class="form-select">
-                            <option value="-1">Select Section</option>                            
+                <div class="col">
+                    <div class="input-group mb-3">
+                        <label for="class_id" class="input-group-text">Class</label>
+                        <select name="class" id="class_id" class="form-control">
+                            <option value="-1">Select...</option>
                         </select>
                     </div>
                 </div>
@@ -48,12 +49,8 @@
                         <button type="button" id="searchBtn" class="btn btn-primary">Search</button>
                     </div>
                 </div>
-
-
-
-
-
             </div>
+            <hr>
         </form>
     </div>
     {{--  --}}
@@ -69,53 +66,94 @@
                     <th>Action</th>
                 </tr>
             </thead>
+            <tbody id="studentListkkkkk">
+                
+            </tbody>
         </table>
     </div>
 @endsection
 @section('script')
     <script>
-        $(document).ready(function () {
-            $("#shift_id").change(function () {
-                let id = $(this).val();
-                console.log(id);
-                $.get("{{ route('standatd.getStandardFromShift' ) }}", {
-                    shift_id: id
-                }, function (data) {
-                    console.log(data);
-                    let options = `<option value='-1'>Select Section</option>`;
-                        for (const key in data) {
-                            options += `<option value="${key}">${data[key]}</option>`;
-                        }                        
-                        $("#standard_id").html(options);
-
-                })
-            });
-
-
-
-            $("#searchBtn").click(function () {
-                alert("hello");
-                var shift_id = $("#shift_id").val();
-                var standard_id = $("#standard_id").val();
-                var section_id = $("#section_id").val();
-                // var url = "{{ route('enrollment.search') }}?shift_id=" + shift_id + "&standard_id=" + standard_id + "&section_id=" + section_id;
-                // window.location.href = url;
-                var data = {
-                    shift_id: shift_id,
-                    standard_id: standard_id,
-                    section_id: section_id
-                };
-                // console.log(data);
-                var URL = "{{ route('enrollment.search') }}";
-                $.post(URL, data,
-                    function (data, textStatus, jqXHR) {
-                        console.log(data);
-                        //for in loop
-                        
+        $(document).ready(function() {
+            $('#session').change(function() {
+                let session = $(this).val();
+                $.ajax({
+                    type: "POST",
+                    url: "{{ route('standatd.getShiftsFromSession') }}",
+                    data: {
+                        session: session
                     },
-                    "dataType"
-                );
+                    success: function(data) {
+                        let html = '<option value="-1">Select...</option>';
+                        $.each(data, function(key, value) {
+                            html += '<option value="' + key + '">' + value +
+                                '</option>';
+                        });
+                        $('#shift_id').html(html);
+                    }
+                });
             });
+
+
+            $("#shift_id").change(function() {
+                let id = $(this).val();
+                $.ajax({
+                    type: "POST",
+                    url: "{{ route('standatd.getStandardFromShift') }}",
+                    data: {
+                        shift_id: id
+                    },
+                    success: function(data) {
+                        let options = '<option value="-1">Select...</option>';
+                        $.each(data, function(key, value) {
+                            options += '<option value="' + key + '">' + value +
+                                '</option>';
+                        });
+                        $("#class_id").html(options);
+                    }
+                });
+            });
+
+
+            $("#searchBtn").click(function() {
+                let session = $("#session").val();
+                let shiftid = $("#shift_id").val();
+                let standardid = $("#class_id").val();
+
+                if (session == -1 || shiftid == -1 || standardid == -1) {
+                    alert("Please select all option");
+                    return;
+                }
+
+                let data = {
+                    shift_id: shiftid,
+                    standard_id: standardid,
+                };
+
+                $.ajax({
+                    type: "POST",
+                    url: "{{ route('enrollment.search') }}",
+                    data: data,
+                    success: function(data) {
+                        // console.log(data);
+                        let html = '';
+                        $.each(data, function(key, value) {
+                            // console.log(key);
+                            // console.log(value);
+                            html += '<tr>';
+                            html += '<td>' + value.first_name + ' ' + value.last_name + '</td>';
+                            html += '<td>' + value.roll_no + '</td>';
+                            html += '<td>' + value.admission_no + '</td>';
+                            html += '<td>' + value.date + '</td>';
+                            html += '<td>' + value.mobile + '</td>';
+                            html += '<td>' + value.action + '</td>';
+                            html += '</tr>';
+                        });
+                        $("#studentListkkkkk").html(html);
+                    }
+                });
+            });
+
         });
     </script>
 @endsection
