@@ -82,7 +82,7 @@ class DatabaseSeeder extends Seeder
             [
                 StudentSeeder::class,
                // EnrollmentSeeder::class,
-                //FeesTypeSeeder::class,
+                FeesTypeSeeder::class,
             ]
         );
     }
