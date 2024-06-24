@@ -35,7 +35,7 @@
                 <td>{{ $feemaster->status }}</td>
                 <td>
                     <div class="d-flex justify-content-center">
-                        <a href="{{ route('feemaster.edit', $feemaster->id) }}" class="btn btn-sm btn-outline-secondary">
+                        <a href="{{ route('feemaster.edit', $feemaster) }}" class="btn btn-sm btn-outline-secondary">
                             <i class="fa fa-edit"></i>
                         </a>
                        {{-- show --}}

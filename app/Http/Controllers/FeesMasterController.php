@@ -55,21 +55,21 @@ class FeesMasterController extends Controller
         $feesmaster->status = $request->status;
         $feesmaster->save();
 
-        return redirect()->route('feemasters.index')->with('success', 'Fees Master Created Successfully');
+        return redirect()->route('feemaster.index')->with('success', 'Fees Master Created Successfully');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(FeesMaster $feesMaster)
+    public function show(FeesMaster $feemaster)
     {
-        // dd($feesMaster);
+        dd($feemaster);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(FeesMaster $feesMaster)
+    public function edit(FeesMaster $feemaster)
     {
         // dd($feesMaster);
         // Category::pluck('name', 'id');
@@ -82,7 +82,7 @@ class FeesMasterController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, FeesMaster $feesMaster)
+    public function update(Request $request, FeesMaster $feemaster)
     {
         $request->validate([
             'fees_group_id' => 'required',
@@ -104,17 +104,24 @@ class FeesMasterController extends Controller
         // $feesMaster->fine_percentage = $request->fine_percentage;
         // $feesMaster->status = $request->status;
         // $feesMaster->save();
-        $feesMaster->update($request->all());
+        $feemaster->update($request->all());
 
-        return redirect()->route('feemasters.index')->with('success', 'Fees Master Updated Successfully');
+        return redirect()->route('feemaster.index')->with('success', 'Fees Master Updated Successfully');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(FeesMaster $feesMaster)
+    public function destroy(FeesMaster $feemaster)
     {
-        $feesMaster->delete();
-        return redirect()->route('feemasters.index')->with('success', 'Fees Master Deleted Successfully');
+        // dd($feemaster);
+        if(FeesMaster::find($feemaster->id)->delete()){
+            return redirect()->route('feemaster.index')->with('success', 'Fees Master Deleted Successfully');
+        }
+        else{
+            return redirect()->route('feemaster.index')->with('error', 'Fees Master Not Deleted');
+        }
+        // $feesMaster->delete();
+        
     }
 }
