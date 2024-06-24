@@ -17,7 +17,9 @@ class ExamFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'name' => fake()->unique(),
+            'term' => fake()->unique(),
+            'status' => 1,
         ];
     }
 }

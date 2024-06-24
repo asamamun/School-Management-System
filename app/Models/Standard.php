@@ -33,14 +33,14 @@ class Standard extends Model
         return $this->belongsTo(Section::class);
     }
     public function subjects()
- {
- return $this->belongsToMany(Subject::class);
- }
+    {
+        return $this->belongsToMany(Subject::class);
+    }
     public function users()
- {
- return $this->belongsToMany(User::class);
- }
- public function enrollments(): HasMany
+    {
+        return $this->belongsToMany(User::class);
+    }
+    public function enrollments(): HasMany
     {
         return $this->hasMany(Enrollment::class);
     }
@@ -52,5 +52,12 @@ class Standard extends Model
     {
         return $this->hasMany(FeesAssign::class);
     }
-
+    public function marks(): HasMany
+    {
+        return $this->hasMany(Mark::class);
+    }
+    public function resultsheets(): HasMany
+    {
+        return $this->hasMany(Resultsheet::class);
+    }
 }

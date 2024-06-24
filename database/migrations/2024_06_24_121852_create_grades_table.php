@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('code');
             $table->integer('marksfrom');
             $table->integer('marksto');
+            $table->float('point');
             $table->string('remarks');
             $table->timestamps();
         });

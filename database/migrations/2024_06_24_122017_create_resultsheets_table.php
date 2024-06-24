@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             //id, session, exam_id, standard_id, student_id, total, avg, classavg, pos, af, ps, p_comment, t_comment, created_at, updated_at
             $table->string('session');
-            $table->unsignedBigInteger('exam_id')->required();
+            $table->unsignedBigInteger('exam_id')-> required();
             $table->foreign('exam_id')->references('id')->on('exams')->onDelete('restrict');
             $table->unsignedBigInteger('standard_id')->required();
             $table->foreign('standard_id')->references('id')->on('standards')->onDelete('restrict');
@@ -30,7 +30,7 @@ return new class extends Migration
             $table->string('p_comment')->comment('principal comment')->nullable();
             $table->string('t_comment')->comment('teacher comment')->nullable();
             $table->timestamps();
-        });
+        }); 
     }
 
     /**

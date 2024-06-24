@@ -81,8 +81,10 @@ class DatabaseSeeder extends Seeder
         $this->call(
             [
                 StudentSeeder::class,
-               // EnrollmentSeeder::class,
+                // EnrollmentSeeder::class,
                 FeesTypeSeeder::class,
+                ExamSeeder::class,
+                GradeSeeder::class
             ]
         );
     }
