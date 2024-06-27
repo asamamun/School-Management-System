@@ -4,7 +4,6 @@
     {{-- {{ dd($students)}} --}}
     <div class="container">
 
-        {{-- <a href="{{ route('student.user.create') }}" class="btn btn-sm btn-outline-secondary"><i class="fa fa-plus"></i> Create</a> --}}
         <table class="table">
             <thead>
                 <tr>
@@ -34,17 +33,18 @@
                         <td>{{ $student->standard->name .'('.$student->section->name.')' }}</td>
                         <td>
                             <div class="d-flex justify-content-center">
-                                <a href="#" class="btn btn-sm btn-outline-secondary">
+                                <a href="{{ route('student.edit', $student) }}" class="btn btn-sm btn-outline-secondary">
                                     <i class="fa fa-edit"></i>
                                 </a>
                                 {{-- {{ route('shift.show', $shift) }} --}}
-                                <a href="#" class="btn btn-sm btn-outline-primary">
+                                {{-- <a href="#" class="btn btn-sm btn-outline-primary">
                                     <i class="fa fa-eye"></i>
-                                </a>
-                                <a href="{{ route('studenttouser', $student->id) }}" class="btn btn-sm btn-outline-secondary"><i class="fa fa-plus"></i> </a>
+                                </a> --}}
+                                <a href="{{ route('studenttouser', $student->id) }}" class="btn btn-sm btn-outline-secondary" title="Create user"><i class="fa fa-plus"></i> </a>
 
 
-                                <form action="#" method="post">
+                                <form action="{{ route('student.destroy', $student->id) }}" method="post"
+                                    onclick="return confirm('Are you sure to delete?')">
                                     @csrf
                                     @method('delete')
 
@@ -60,3 +60,4 @@
         {{ $students->links() }}
     </div>
 @endsection
+

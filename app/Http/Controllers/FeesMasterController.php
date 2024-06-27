@@ -63,7 +63,7 @@ class FeesMasterController extends Controller
      */
     public function show(FeesMaster $feemaster)
     {
-        dd($feemaster);
+        // dd($feemaster);
     }
 
     /**
