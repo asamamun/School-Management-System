@@ -71,13 +71,11 @@ class FeesMasterController extends Controller
      */
     public function edit(FeesMaster $feemaster)
     {
-        // dd($feesMaster);
-        // Category::pluck('name', 'id');
-
         $feesgroups = FeesGroup::pluck('name', 'id');
         $feestypes = FeesType::pluck('name', 'id');
-        return view('fees.master.edit', compact('feesMaster', 'feesgroups', 'feestypes'));
+        return view('fees.master.edit', compact('feemaster', 'feesgroups', 'feestypes'));
     }
+    
 
     /**
      * Update the specified resource in storage.
@@ -115,13 +113,12 @@ class FeesMasterController extends Controller
     public function destroy(FeesMaster $feemaster)
     {
         // dd($feemaster);
-        if(FeesMaster::find($feemaster->id)->delete()){
+        if (FeesMaster::find($feemaster->id)->delete()) {
             return redirect()->route('feemaster.index')->with('success', 'Fees Master Deleted Successfully');
-        }
-        else{
+        } else {
             return redirect()->route('feemaster.index')->with('error', 'Fees Master Not Deleted');
         }
         // $feesMaster->delete();
-        
+
     }
 }
