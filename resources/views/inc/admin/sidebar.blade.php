@@ -82,7 +82,12 @@
                             href="{{ route('feecollect.index') }}">Collect</a>
                     </nav>
                 </div>
-
+                {{-- attendance --}}
+                <a class="nav-link"href="{{ route('attendance.index') }}">
+                    <div class="sb-nav-link-icon"><i class="fas fa-calendar-week"></i></div>
+                    Attendance
+                </a>
+                {{-- /attendance --}}
                 {{-- Interface --}}
                 {{-- <div class="sb-sidenav-menu-heading">Interface</div>
                 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts"

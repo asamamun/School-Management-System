@@ -9,6 +9,14 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Attendance extends Model
 {
     use HasFactory;
+    
+    protected $fillable = [
+        'student_id',
+        'standard_id',
+        'attendance_date',
+        'status',
+        'remarks',
+    ];
     public function student(): BelongsTo
     {
         return $this->belongsTo(Student::class);

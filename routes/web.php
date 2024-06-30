@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdmissionController;
+use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\EnrollmentController;
 use App\Http\Controllers\FeesAssignController;
 use App\Http\Controllers\FeesCollectController;
@@ -84,6 +85,12 @@ Route::middleware(CheckAdmin::class)->group(function () {
     // ajax(class to section(getSectionFromClass), class+section to student ())
     Route::post('/getsectionfromclass', [FeesCollectController::class, 'getSectionFromClass'])->name('getsectionfromclass');
     Route::post('/getstudentfromsectionandclass', [FeesCollectController::class, 'getStudentsFromSection'])->name('getstudentfromsection');
+    
+    /**
+     * attandence routes
+     */
+    Route::resource('/attendance', AttendanceController::class);
+    Route::post('/attendance/search', [AttendanceController::class, 'search'])->name('searchstudentforattendance');
 });
 
 Route::middleware(CheckStaff::class)->group(function () {
