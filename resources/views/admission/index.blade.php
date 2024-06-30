@@ -2,6 +2,9 @@
 
 @section('content')
 <h1>Admission Form</h1>
+<a href="{{ url()->previous() }}" class="btn btn-secondary mb-3">  <i class="fas fa-chevron-left mr-1"></i>
+    <span class="d-none d-sm-inline">Back</span>
+</a>
 <div class="card ot-card">
     <div class="card-body">
         <form
