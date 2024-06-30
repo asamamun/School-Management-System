@@ -3,8 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\Enrollment;
-use App\Models\Section;
-use App\Models\Shift;
 use App\Models\Standard;
 use App\Models\Student;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -17,14 +15,11 @@ class StudentSeeder extends Seeder
      */
     public function run(): void
     {
-        $shiftIds = Shift::pluck('id')->toArray(); // Get all shift ids
-        $sectionIds = Section::pluck('id')->toArray(); // Get all section ids
-
-        Standard::all()->each(function ($standard) use ($shiftIds, $sectionIds) {
+        Standard::all()->each(function ($standard) {
             $students = Student::factory()->count(40)->create([
                 'standard_id' => $standard->id,
-                'section_id' => fake()->randomElement($sectionIds),
-                'shift_id' => fake()->randomElement($shiftIds),
+                'section_id' => $standard->section_id,
+                'shift_id' => $standard->shift_id,
             ]);
 
             foreach ($students as $student) {

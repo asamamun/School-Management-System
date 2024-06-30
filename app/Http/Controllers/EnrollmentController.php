@@ -69,8 +69,7 @@ class EnrollmentController extends Controller
     {
         //
     }
-
-    
+   
 
     /**
      * use jquery AJAX
@@ -105,39 +104,12 @@ class EnrollmentController extends Controller
  */
     public function search(Request $request)
     {
+        $validat= 
         $students = Student::where('shift_id', $request->shift_id)
         ->where('standard_id', $request->standard_id)
         ->with('Shift', 'Section')
         ->get()
         ->toArray();
-        return response()->json($students);
-
-
-        // $students = Student::where('shift_id', $request->shift_id)
-        // ->where('standard_id', $request->standard_id)
-        // ->with('Shift', 'Section')
-        // ->paginate(10);
-        
-        // if ($request->ajax()) {
-        //     return view('enrollment.pagination', compact('students'))->render();
-        // }
-        
-        // return view('enrollment.index', compact('students'));
-
-
-        // $students = Student::where(function ($query) use ($request) {
-        //     $query->where('session',$request->session)
-        //     ->andWhere('shift_id',$request->shift_id)
-        //     ->andWhere('standard_id',$request->standard_id);
-        // })->get();
-        // return response()->json($students);
-        
+        return response()->json($students);        
     }
 }
-
-/**
- * $students = Student::
- * where('name', 'like', '%' . $request->search . '%')
- * ->get();
- * return response()->json($students);
- */

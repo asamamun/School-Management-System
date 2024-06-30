@@ -77,5 +77,4 @@ class Student extends Model
     {
         return $this->hasMany(Resultsheet::class);
     }
-    
 }

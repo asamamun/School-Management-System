@@ -35,15 +35,15 @@ Route::post('/admission', [AdmissionController::class, 'store'])->name('admissio
 // })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/dashboard', function () {
-   if (Auth::user()->role ==='admin') {
-       return redirect()->intended(route('admin.dashboard', absolute:false));
-   }
-   if (Auth::user()->role ==='teacher') {
-       return redirect()->intended(route('teacher.dashboard', absolute:false));
-   }
-   if (Auth::user()->role ==='staff') {
-       return redirect()->intended(route('staff.dashboard', absolute:false));
-   }
+    if (Auth::user()->role === 'admin') {
+        return redirect()->intended(route('admin.dashboard', absolute: false));
+    }
+    if (Auth::user()->role === 'teacher') {
+        return redirect()->intended(route('teacher.dashboard', absolute: false));
+    }
+    if (Auth::user()->role === 'staff') {
+        return redirect()->intended(route('staff.dashboard', absolute: false));
+    }
 })->middleware(['auth'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
@@ -52,41 +52,48 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 // Route::middleware(CheckAdmin::class)->group(function () {
-   
+
 //    Route::resource('admin', UserController::class);
 // });
 
 // Route::middleware(['auth','admin'])->group(function () {
 Route::middleware(CheckAdmin::class)->group(function () {
-   Route::get('/admindashboard', [AdminController::class, 'index'])->name('admin.dashboard');
-   Route::resource('/subjects', SubjectController::class)->names('subject');
-   Route::resource('/shifts', ShiftController::class)->names('shift');
-   Route::resource('/sections', SectionController::class)->names('section');
-   Route::resource('/standards', StandardController::class)->names('standards');
-   Route::resource('/students', StudentController::class)->names('student');
-   Route::resource('/enrollments', EnrollmentController::class)->names('enrollment');
-   Route::get('/studenttouser/{id}/create', [StudentToUserController::class, 'createUserFromStudent'])->name('studenttouser');
-   Route::resource('/feegroups', FeesGroupController::class)->names('feegroup');
-   Route::resource('/feetypes', FeesTypeController::class)->names('feetype');
-   Route::resource('/feemasters', FeesMasterController::class)->names('feemaster');
-   Route::resource('/feeassigns', FeesAssignController::class)->names('feeassign');
-   Route::resource('/feecollects', FeesCollectController::class)->names('feecollect');
-   Route::post('/enrollments/search', [EnrollmentController::class, 'search'])->name('enrollment.search');
-   Route::post('/getstandardsfromshift', [EnrollmentController::class, 'getStandards'])->name('standatd.getStandardFromShift');
-   Route::post('/getsectionsfromstandard', [EnrollmentController::class, 'getSections'])->name('standatd.getSectionsFromStandard');
-   Route::post('/getshiftsfromsession', [EnrollmentController::class, 'getShifts'])->name('standatd.getShiftsFromSession');
-
+    Route::get('/admindashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+    Route::resource('/subjects', SubjectController::class)->names('subject');
+    Route::resource('/shifts', ShiftController::class)->names('shift');
+    Route::resource('/sections', SectionController::class)->names('section');
+    Route::resource('/standards', StandardController::class)->names('standards');
+    Route::resource('/students', StudentController::class)->names('student');
+    Route::resource('/enrollments', EnrollmentController::class)->names('enrollment');
+    Route::get('/studenttouser/{id}/create', [StudentToUserController::class, 'createUserFromStudent'])->name('studenttouser');
+    Route::resource('/feegroups', FeesGroupController::class)->names('feegroup');
+    Route::resource('/feetypes', FeesTypeController::class)->names('feetype');
+    Route::resource('/feemasters', FeesMasterController::class)->names('feemaster');
+    Route::resource('/feeassigns', FeesAssignController::class)->names('feeassign');
+    Route::resource('/feecollects', FeesCollectController::class)->names('feecollect');
+    Route::post('/enrollments/search', [EnrollmentController::class, 'search'])->name('enrollment.search');
+    Route::post('/getstandardsfromshift', [EnrollmentController::class, 'getStandards'])->name('standatd.getStandardFromShift');
+    Route::post('/getsectionsfromstandard', [EnrollmentController::class, 'getSections'])->name('standatd.getSectionsFromStandard');
+    Route::post('/getshiftsfromsession', [EnrollmentController::class, 'getShifts'])->name('standatd.getShiftsFromSession');
+    // FeesAssing getfeestype
+    Route::post('getfeestype', [FeesAssignController::class, 'getfeestype'])->name('feeassign.getfeestype');
+    Route::post('feeassignstudentsearch', [FeesAssignController::class, 'studentsearch'])->name('feeassign.studentsearch');
+    // route use search(admissionNO) search(class_id,section_id pr student_id (feecollect.studentlist))
+    Route::post('/feecollect/search', [FeesCollectController::class, 'SearchByAdmissionNo'])->name('feecollect.searchstudent');
+    Route::post('/feecollect/searchlist', [FeesCollectController::class, 'getStudentsFromClass'])->name('feecollect.studentlist');
+    // ajax(class to section(getSectionFromClass), class+section to student ())
+    Route::post('/getsectionfromclass', [FeesCollectController::class, 'getSectionFromClass'])->name('getsectionfromclass');
+    Route::post('/getstudentfromsectionandclass', [FeesCollectController::class, 'getStudentsFromSection'])->name('getstudentfromsection');
 });
 
 Route::middleware(CheckStaff::class)->group(function () {
-   //
+    //
 });
 Route::middleware(CheckTeacher::class)->group(function () {
-   Route::get('/teacherdashboard', [TeacherController::class, 'index'])->name('teacher.dashboard');
-
+    Route::get('/teacherdashboard', [TeacherController::class, 'index'])->name('teacher.dashboard');
 });
 Route::middleware(CheckStudent::class)->group(function () {
-   //
+    //
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

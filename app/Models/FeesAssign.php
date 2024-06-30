@@ -12,13 +12,9 @@ class FeesAssign extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'fees_group_id',
-        'fees_type_id',
-        'duedate',
-        'amount',
-        'fine_type',
-        'fine_amount',
-        'fine_percentage',
+        'fees_master_id',
+        'student_id',
+        'standard_id',
         'status',
     ];
     public function standard(): BelongsTo
@@ -35,6 +31,6 @@ class FeesAssign extends Model
     }
     public function feesCollect(): HasOne
     {
-        return $this->hasOne(FeesCollect::class);
+        return $this->hasOne(FeesCollect::class)->withTrashed();
     }
 }
