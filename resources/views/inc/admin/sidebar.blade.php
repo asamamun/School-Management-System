@@ -12,14 +12,14 @@
                     @if (Auth::user()->role == 'admin')
                         {{-- Setting --}}
                         <div class="sb-sidenav-menu-heading">Setting</div>
-                        <a class="nav-link collapsed {{ Request::is('shift*') || Request::is('section*') || Request::is('subject*') ? 'fw-bold' : '' }}"
+                        <a class="nav-link collapsed {{ Request::is('shift*') || Request::is('section*') || Request::is('subject*') || Request::is('assignsubject*') || Request::is('standards*') ? 'fw-bold' : '' }}"
                             href="#" data-bs-toggle="collapse" data-bs-target="#Academic" aria-expanded="false"
                             aria-controls="collapseLayouts">
                             <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                             Academic
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                         </a>
-                        <div class="collapse {{ Request::is('shift*') || Request::is('section*') || Request::is('subject*') || Request::is('standards*') ? 'show' : '' }}"
+                        <div class="collapse {{ Request::is('shift*') || Request::is('section*') || Request::is('subject*') || Request::is('assignsubject*') || Request::is('standards*') ? 'show' : '' }}"
                             id="Academic" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
                                 <a class="nav-link {{ Request::is('shift*') ? 'active fw-bold' : '' }}"
@@ -28,6 +28,8 @@
                                     href="{{ route('section.index') }}">Section</a>
                                 <a class="nav-link {{ Request::is('subject*') ? 'active fw-bold' : '' }}"
                                     href="{{ route('subject.index') }}">Subject</a>
+                                <a class="nav-link {{ Request::is('assignsubject*') ? 'active fw-bold' : '' }}"
+                                    href="{{ route('assignsubject.index') }}">Subject Assign</a>
                                 <a class="nav-link {{ Request::is('standards*') ? 'active fw-bold' : '' }}"
                                     href="{{ route('standards.index') }}">Standards</a>
                             </nav>
@@ -80,6 +82,27 @@
                             href="{{ route('feeassign.index') }}">Assign</a>
                         <a class="nav-link {{ Request::is('feecollect*') ? 'active fw-bold' : '' }}"
                             href="{{ route('feecollect.index') }}">Collect</a>
+                    </nav>
+                </div>
+                 {{-- Exam --}}
+
+                {{-- <div class="sb-sidenav-menu-heading">Examination</div> --}}
+                <a class="nav-link collapsed {{ Request::is('exam*') || Request::is('grade*') || Request::is('mark*') ? 'fw-bold' : '' }}"
+                    href="#" data-bs-toggle="collapse" data-bs-target="#Exam" aria-expanded="false"
+                    aria-controls="collapseLayouts">
+                    <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                    Examination
+                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                </a>
+                <div class="collapse {{ Request::is('exam*') || Request::is('grade*') || Request::is('mark*') ? 'show' : '' }}"
+                    id="Exam" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                    <nav class="sb-sidenav-menu-nested nav">
+                        <a class="nav-link {{ Request::is('exam*') ? 'active fw-bold' : '' }}"
+                            href="{{ route('exam.index') }}">Exam</a>
+                        <a class="nav-link {{ Request::is('grade*') ? 'active fw-bold' : '' }}"
+                            href="{{ route('grade.index') }}">Grade</a>
+                        <a class="nav-link {{ Request::is('mark*') ? 'active fw-bold' : '' }}"
+                            href="{{ route('mark.index') }}">Mark</a>
                     </nav>
                 </div>
                 {{-- attendance --}}

@@ -12,7 +12,7 @@ class GradeController extends Controller
      */
     public function index()
     {
-        //
+        return view('examination.grade.index');
     }
 
     /**

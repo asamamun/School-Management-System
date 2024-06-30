@@ -4,11 +4,14 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdmissionController;
 use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\EnrollmentController;
+use App\Http\Controllers\ExamController;
 use App\Http\Controllers\FeesAssignController;
 use App\Http\Controllers\FeesCollectController;
 use App\Http\Controllers\FeesGroupController;
 use App\Http\Controllers\FeesMasterController;
 use App\Http\Controllers\FeesTypeController;
+use App\Http\Controllers\GradeController;
+use App\Http\Controllers\MarkController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SectionController;
 use App\Http\Controllers\ShiftController;
@@ -16,6 +19,7 @@ use App\Http\Controllers\StandardController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\StudentToUserController;
 use App\Http\Controllers\StudentUserController;
+use App\Http\Controllers\SubjectAssignController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\UserController;
@@ -85,6 +89,14 @@ Route::middleware(CheckAdmin::class)->group(function () {
     // ajax(class to section(getSectionFromClass), class+section to student ())
     Route::post('/getsectionfromclass', [FeesCollectController::class, 'getSectionFromClass'])->name('getsectionfromclass');
     Route::post('/getstudentfromsectionandclass', [FeesCollectController::class, 'getStudentsFromSection'])->name('getstudentfromsection');
+    Route::resource('/assignsubjects', SubjectAssignController::class)->names('assignsubject');
+    Route::resource('/marks', MarkController::class)->names('mark');
+    Route::post('/marks/search', [MarkController::class, 'search'])->name('mark.search');
+    Route::post('/marks/shift', [MarkController::class, 'getShift'])->name('mark.getShift');
+    Route::post('/marks/standard', [MarkController::class, 'getStandard'])->name('mark.getStandard');
+    Route::post('/marks/subject', [MarkController::class, 'getSubject'])->name('mark.getSubject');
+    Route::resource('/exams', ExamController::class)->names('exam');
+    Route::resource('/grades', GradeController::class)->names('grade');
     
     /**
      * attandence routes
