@@ -76,10 +76,10 @@
                 <table width="100%" class="table table-striped">
                     <thead>
                         <tr>
+                            <th>Roll</th>
                             <th>Name</th>
                             <th>Total</th>
                             <th>Acheived</th>
-                            <th>Grade</th>
                         </tr>
                     </thead>
                     <tbody id="studentList">
@@ -172,7 +172,8 @@
                 let totalmarks = $("#studentmarks").val();
 
 
-                if (session == -1 || shiftid == -1 || standardid == -1 || examid == -1 || subjectid == -1 || totalmarks == false) {
+                if (session == -1 || shiftid == -1 || standardid == -1 || examid == -1 || subjectid == -1 ||
+                    totalmarks == false) {
                     alert("Please select all option");
                     return;
                 }
@@ -196,13 +197,17 @@
                 let html = '';
                 // console.log(data);
                 $.each(data, function(key, value) {
-                    console.log(value);
+                    // console.log(value);
                     html += `
                             <tr>
-                                <td><input type="text" name="student_id[]" value="${value.first_name}" readonly></td>
+                                <td>${value.roll_no}</td>
+                              <td>
+                    <input type="hidden" name="student_id[]" value="${value.id}">
+                    <input type="text" name="student_name[]" value="${value.first_name}" readonly>
+                </td>
                                 <td><input type="number" name="marks[]" value="${totalmarks}" readonly></td>
-                                <td><input type="number" name="achievedMarks[]" value="" min="0" max="${totalmarks}"></td>
-                                td>input type="text" </td>
+                                <td><input type="number" name="achievedMarks[]" value="0" min="0" max="${totalmarks}"></td>
+                               
                             </tr>
                             `;
                 });

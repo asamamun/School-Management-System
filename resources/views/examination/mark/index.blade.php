@@ -33,8 +33,8 @@
             </div>
             <div class="col">
                 <div class="input-group mb-3">
-                    <label for="class_id" class="input-group-text">Class</label>
-                    <select name="class" id="class_id" class="form-control">
+                    <label for="standard_id" class="input-group-text">Class</label>
+                    <select name="standard" id="standard_id" class="form-control">
                         <option value="-1">Select...</option>
                     </select>
                 </div>
@@ -72,4 +72,52 @@
 @endsection
 
 @section('script')
+<script>
+    $(document).ready(function () {
+          // get Shift
+          $('#session').change(function() {
+                let session = $(this).val();
+                $.ajax({
+                    type: "POST",
+                    url: "{{ route('mark.getShift') }}",
+                    data: {
+                        session: session
+                    },
+                    success: function(data) {
+                        let html = '<option value="-1">Select...</option>';
+                        $.each(data, function(key, value) {
+                            // console.log(key);
+                            html += '<option value="' + key + '">' + value +
+                                '</option>';
+                        });
+                        $('#shift_id').html(html);
+                    }
+                });
+            });
+            // get Standard
+            $("#shift_id").change(function() {
+                let id = $(this).val();
+                let session = $("#session").val();
+                $.ajax({
+                    type: "POST",
+                    url: "{{ route('mark.getStandard') }}",
+                    data: {
+                        shift_id: id,
+                        session: session,
+                    },
+                    success: function(data) {
+                        let html = '<option value="-1">Select...</option>';
+                        $.each(data, function(key, value) {
+                            console.log(value.id);
+                            html += '<option value="' + value.id + '">' + value.name +
+                                '(' +
+                                value.section.name + ')'
+                            '</option>';
+                        });
+                        $("#standard_id").html(html);
+                    }
+                });
+            });
+    });
+</script>
 @endsection
