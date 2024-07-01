@@ -7,6 +7,7 @@
             <table class="table table-sm table-success table-striped table-hover table-bordered">
                 <thead class="thead text-center">
                     <tr>
+                        <th class="">ID</th>
                         <th class="">Student name</th>
                         <th class="">Admission NO</th>
                         <th class="">Class (Section)</th>
@@ -19,13 +20,14 @@
                     @isset($student)
                         {{-- Single student --}}
                         <tr>
+                            <td>{{ $student->id ?? '' }}</td>
                             <td>{{ $student->first_name ?? '' }} {{ $student->last_name ?? '' }}</td>
                             <td>{{ $student->admission_no ?? '' }}</td>
                             <td>{{ $student->Standard->name ?? '' }} ({{ $student->Section->name ?? '' }})</td>
                             <td>{{ $student->guardian_name ?? '' }}</td>
                             <td>{{ $student->mobile ?? '' }}</td>
                             <td class="text-center">
-                                <a href="#" class="btn btn-info"><i class="fa fa-money"></i> Collect</a>
+                                <a href="{{ route('feecollect.show', $student->id) }}" class="btn btn-info"><i class="fa fa-money"></i> Collect</a>
                             </td>
                         </tr>
                     @endisset
@@ -34,13 +36,14 @@
                         {{-- List of students --}}
                         @foreach ($studentlist as $student)
                             <tr>
+                                <td>{{ $student->id ?? '' }}</td>
                                 <td>{{ $student->first_name ?? '' }} {{ $student->last_name ?? '' }}</td>
                                 <td>{{ $student->admission_no ?? '' }}</td>
                                 <td>{{ $student->Standard->name ?? '' }} ({{ $student->Section->name ?? '' }})</td>
                                 <td>{{ $student->guardian_name ?? '' }}</td>
                                 <td>{{ $student->mobile ?? '' }}</td>
                                 <td class="text-center">
-                                    <a href="#" class="btn btn-info"><i class="fa fa-money"></i> Collect</a>
+                                    <a href="{{ route('feecollect.show', $student->id) }}" class="btn btn-info"><i class="fa fa-money"></i> Collect</a>
                                 </td>
                             </tr>
                         @endforeach
@@ -49,7 +52,7 @@
                     @empty($studentlist)
                         @if (empty($student))
                             <tr>
-                                <td colspan="6" class="text-center">No data available.</td>
+                                <td colspan="7" class="text-center">No data available.</td>
                             </tr>
                         @endif
                     @endempty

@@ -33,4 +33,13 @@ class FeesAssign extends Model
     {
         return $this->hasOne(FeesCollect::class)->withTrashed();
     }
+
+    public function feesGroups(): HasManyThrough
+    {
+        return $this->hasManyThrough(FeesGroup::class, FeesMaster::class);
+    }
+    public function feesTypes(): HasManyThrough
+    {
+        return $this->hasManyThrough(FeesType::class, FeesMaster::class);
+    }
 }

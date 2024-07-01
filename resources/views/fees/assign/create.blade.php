@@ -109,6 +109,7 @@
 @section('script')
     <script>
         $(document).ready(function() {
+
             $('#feesgroup').change(function() {
                 let feesgroup_id = $(this).val();
                 $.ajax({
@@ -134,6 +135,27 @@
                         $('#fees_types').html(html);
                     }
                 });
+            });
+            
+            $('#all_fees_masters').click(function() {
+                $('.fees_master').prop('checked', this.checked);
+            });
+            $('.fees_master').click(function() {
+                if ($('.fees_master:checked').length === $('.fees_master').length) {
+                    $('#all_fees_masters').prop('checked', true);
+                } else {
+                    $('#all_fees_masters').prop('checked', false);
+                }
+            });
+            $('#all_students').click(function() {
+                $('.studentlist').prop('checked', this.checked);
+            });
+            $('.studentlist').click(function() {
+                if ($('.studentlist:checked').length === $('.studentlist').length) {
+                    $('#all_students').prop('checked', true);
+                } else {
+                    $('#all_students').prop('checked', false);
+                }
             });
             $('#session').change(function() {
                 let session = $(this).val();
@@ -201,7 +223,7 @@
                         $.each(data, function(key, value) {
                             html +=
                                 `<tr>
-                                <td><input class="form-check-input fees_master" type="checkbox" name="student_id[]" value="${value.id}"></td>
+                                <td><input class="form-check-input studentlist" type="checkbox" name="student_id[]" value="${value.id}"></td>
                                 <td>${value.admission_no}</td>
                                 <td>${value.first_name} ${value.last_name}</td>
                                 <td>${value.standard.name}(${value.section.name})</td>

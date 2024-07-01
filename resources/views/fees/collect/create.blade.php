@@ -1,6 +1,6 @@
-@extends('layouts.adminapp', ['title' => 'Admin'])
+@extends('layouts.adminapp', ['title' => 'Admin | Fee Collection'])
 
 @section('content')
-<p>create</p>
-
+<h3>Fees Collect Create</h3>
+ {{ dd(student)}}
 @endsection

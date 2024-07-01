@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\FeesAssign;
 use App\Models\FeesCollect;
+use App\Models\FeesMaster;
 use App\Models\Shift;
 use App\Models\Standard;
 use App\Models\Student;
@@ -25,7 +27,7 @@ class FeesCollectController extends Controller
      */
     public function create()
     {
-        //
+        return view('fees.collect.create');
     }
 
     /**
@@ -33,15 +35,51 @@ class FeesCollectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'collect' => 'required|array',
+            'payment_type' => 'required',
+            'trxid' => 'required',
+            'amount' => 'required|numeric',
+            'note' => 'required',
+        ]);
+
+        foreach ($request->collect as $feesAssignId) {
+            // dd($feesAssignId);
+            $feesAssign = FeesAssign::find($feesAssignId);
+            if ($feesAssign) {
+                $feesCollect = new FeesCollect();
+                $feesCollect->fees_assign_id = $feesAssignId;
+                $feesCollect->payment_type = $request->payment_type;
+                $feesCollect->trxid = $request->trxid;
+                $feesCollect->amount = $request->amount;
+                $feesCollect->date = date('Y-m-d');
+                $feesCollect->note = $request->note;
+                $feesCollect->save();
+
+                $feesAssign->status = 'paid';
+                $feesAssign->save();
+            }
+        }
+
+        return redirect()->route('feecollect.index')->with('success', 'Fees collected successfully');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(FeesCollect $feesCollect)
+    public function show($id)
     {
-        //
+
+        $student = Student::find($id);
+        $student->load('standard', 'shift');
+
+        $fessassigned = FeesAssign::where('student_id', $id)
+            ->with('feesmaster.feesgroup', 'feesmaster.feestype')
+            ->get();
+
+        // dd($student, $fessassigned);
+
+        return view('fees.collect.show', compact('student', 'fessassigned'));
     }
 
     /**
