@@ -11,7 +11,7 @@
             @csrf
             <div class="container">
                 <div class="row">
-                    <div class="col md-3">
+                    <div class="col md-4">
                         <div class="input-group mb-3">
                             <label for="session" class="input-group-text">Session</label>
                             <select name="session" id="session" class="form-control">
@@ -22,7 +22,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col md-3">
+                    <div class="col md-4">
                         <div class="input-group mb-3">
                             <label for="shift_id" class="input-group-text">Shift</label>
                             <select name="shift" id="shift_id" class="form-control">
@@ -31,7 +31,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col md-3">
+                    <div class="col md-4">
                         <div class="input-group mb-3">
 
                             <label for="standard_id" class="input-group-text">Class &#40;section&#41;</label>
@@ -41,7 +41,9 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col md-3">
+                </div>
+                <div class="row">
+                    <div class="col md-4">
                         <div class="input-group mb-3">
                             <label for="exam_id" class="input-group-text">Exam Type</label>
                             <select name="exam" id="exam_id" class="form-control">
@@ -52,7 +54,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col md-3">
+                    <div class="col md-4">
                         <div class="input-group mb-3">
                             <label for="subject_id" class="input-group-text">Subject</label>
                             <select name="subject" id="subject_id" class="form-control">
@@ -69,7 +71,7 @@
                 <p>Student List</p>
                 <input type="number" name="totalmarks" id="studentmarks" class="form-control"
                     placeholder="Enter Total Marks" required>
-                <div class="input-group mb-3">
+                <div class="input-group mb-3 mt-3">
                     <label for="search" class="input-group-text"><i class="fa fa-search"></i></label>
                     <button type="button" id="searchBtn" class="btn btn-primary">Get Student</button>
                 </div>

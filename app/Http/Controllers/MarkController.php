@@ -157,4 +157,17 @@ class MarkController extends Controller
         $students = Student::where('standard_id', $request->standard_id)->get();
         return response()->json($students);
     }
+    public function studentSearch(Request $request)
+    {
+    //    dd($request);
+    $students = Student::where('standard_id', $request->standard)
+    ->with('standard:id,name', 'section:id,name', 'shift:id,name')
+    ->get();
+    $marks=Mark::where('standard_id', $request->standard)
+    ->with('student:id,first_name,roll_no', 'subject:id,name', 'grade:id,name')
+    ->get();
+    $sessions = Standard::select('session')->distinct()->pluck('session');
+// dd($marks);
+    return view('Examination.mark.index', compact('students', 'marks','sessions'));
+    }
 }

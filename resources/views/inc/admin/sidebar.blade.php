@@ -110,6 +110,12 @@
                     <div class="sb-nav-link-icon"><i class="fas fa-calendar-week"></i></div>
                     Attendance
                 </a>
+                 {{-- Result --}}
+                 <a class="nav-link"href="{{ route('resultsheet.index') }}">
+                    <div class="sb-nav-link-icon"><i class="fas fa-calendar-week"></i></div>
+                    Result
+                </a>
+                {{-- /Result --}}
                 {{-- /attendance --}}
                 {{-- Interface --}}
                 {{-- <div class="sb-sidenav-menu-heading">Interface</div>

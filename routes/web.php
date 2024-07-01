@@ -13,6 +13,7 @@ use App\Http\Controllers\FeesTypeController;
 use App\Http\Controllers\GradeController;
 use App\Http\Controllers\MarkController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ResultsheetController;
 use App\Http\Controllers\SectionController;
 use App\Http\Controllers\ShiftController;
 use App\Http\Controllers\StandardController;
@@ -98,6 +99,12 @@ Route::middleware(CheckAdmin::class)->group(function () {
     Route::post('/marks/subject', [MarkController::class, 'getSubject'])->name('mark.getSubject');
     Route::resource('/exams', ExamController::class)->names('exam');
     Route::resource('/grades', GradeController::class)->names('grade');
+    Route::post('marks/studentSearch', [MarkController::class, 'studentSearch'])->name('mark.studentSearch');
+    Route::resource('/resultsheets', ResultsheetController::class)->names('resultsheet');
+    Route::post('/resultsheets/search', [ResultsheetController::class, 'search'])->name('resultsheet.search');
+    Route::post('/resultsheets/studentSearchResult', [ResultsheetController::class, 'studentSearchResult'])->name('resultsheet.studentSearchResult');
+    Route::post('/resultsheets/shift', [ResultsheetController::class, 'getShift'])->name('resultsheet.getShift');
+    Route::post('/resultsheets/standard', [ResultsheetController::class, 'getStandard'])->name('resultsheet.getStandard');
     
     /**
      * attandence routes
