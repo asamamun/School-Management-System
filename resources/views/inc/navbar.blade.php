@@ -17,7 +17,7 @@
       </ul>
       <ul class="navbar-nav ms-auto mb-lg-0 justify-content-center">
         <li class="nav-item">
-          <a style="font-size: 1.0rem; color: white" class="nav-link btn btn-outline-success" href="{{ route('admission') }}">{{ __('Admission') }}</a>
+          <a style="font-size: 1.0rem; color: white" class="nav-link btn btn-outline-success" href="{{ route('admission.index') }}">{{ __('Admission') }}</a>
         </li>
         @if (Route::has('login') && Route::has('logout'))
           @auth

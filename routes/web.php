@@ -33,7 +33,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/admission', [AdmissionController::class, 'index'])->name('admission');
+Route::get('/admission', [AdmissionController::class, 'index'])->name('admission.index');
+Route::get('/admission/create', [AdmissionController::class, 'create'])->name('admission.create');
 Route::post('/admission', [AdmissionController::class, 'store'])->name('admission.store');
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
