@@ -35,60 +35,6 @@ class MarkController extends Controller
         $grades = Grade::all();
         return view('examination.mark.create', compact('sessions', 'exams', 'grades'));
     }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    // public function store(Request $request)
-    // {
-    //     // dd($request->all());
-    //     $achievedMarks = $request->achievedMarks;
-    //     $studentIds = $request->student_id;
-    //     $subjectId = $request->subject;
-    //     $standardId = $request->standard;
-    //     $examId = $request->exam;
-    //     $marks = $request->achievedMarks;
-    //     // dd($marks);
-    //     $grades = [];
-
-    //     foreach ($marks as $key => $value) {
-    //         $grade = Grade::where('marksfrom', '<=', $value)
-    //             ->where('marksto', '>=', $value)
-    //             ->first();
-    //             $grades[$key] = $grade;
-    //             if ($grade) {
-    //                 // Create a new mark instance
-    //                 $mark = new Mark();
-    //                 $mark->student_id = $studentIds[$key];
-    //                 $mark->subject_id = $subjectId;
-    //                 $mark->standard_id = $standardId;
-    //                 $mark->exam_id = $examId;
-    //                 $mark->main = $value;
-    //                 $mark->remarks = $remarks[$key] ?? '';
-    //                 $mark->grade_id = $grade->id;
-    //                 $mark->save();
-    //             }
-    //     }
-    //     dd($grades);
-
-    //     // $data = $request->except('_token');
-    //     // $studentIds = $data['student_id'];
-    //     // dd($data);
-
-    //     // foreach ($studentIds as $studentId) {
-    //     //     Mark::create([
-    //     //         'student_id' => $studentId,
-    //     //         'standard_id' => $data['standard'],
-    //     //         'exam_id' => $data['exam'],
-    //     //         // 'grade_id' => $data['grade'],
-    //     //         'mark' => $data['marks'],
-    //     //     ]);
-    //     // }
-
-
-    //     return back()->with('success', 'Marks have been saved successfully.');
-    // }
-
     public function store(Request $request)
 {
     $achievedMarks = $request->achievedMarks;
@@ -134,7 +80,7 @@ class MarkController extends Controller
     // Debugging: Check the grades array
     // dd($grades);
 
-    return back()->with('success', 'Marks have been saved successfully.');
+    return redirect()->route('mark.index')->with('success', 'Marks have been saved successfully.');
 }
 
     /**
