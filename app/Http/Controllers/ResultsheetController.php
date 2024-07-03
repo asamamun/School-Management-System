@@ -104,6 +104,16 @@ class ResultsheetController extends Controller
         return response()->json($response);
     }
 
+
+    /* get subject   */
+    public function getSubject(Request $request)
+    {
+        $subjects = Standard::where('standard_id', $request->standard)
+            ->with('subjects:id,name')
+            ->get();
+        return response()->json($subjects);
+    }
+
     /* get student   */
     public function studentSearchResult(Request $request)
     {

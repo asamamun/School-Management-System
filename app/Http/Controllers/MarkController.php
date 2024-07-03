@@ -128,7 +128,8 @@ class MarkController extends Controller
 
     public function getStandard(Request $request)
     {
-        $standards = Standard::where('shift_id', $request->shift_id)
+        // dd($request->all());
+        $standards = Standard::where('shift_id', $request->shift)
             ->where('session', $request->session)
             ->where('status', 'active')
             ->with('section:id,name')
@@ -147,27 +148,30 @@ class MarkController extends Controller
 
     public function getSubject(Request $request)
     {
-        // $standard = Standard::find($request->standard_id)->get('name', 'id');
-        $standard = Standard::find($request->standard_id)->loadMissing('subjects');
+        $standard = Standard::find($request->standard)->loadMissing('subjects');
         $subjects = $standard->subjects->pluck('name', 'id');
         return response()->json($subjects);
     }
     public function search(Request $request)
     {
-        $students = Student::where('standard_id', $request->standard_id)->get();
+        $students = Student::where('standard_id', $request->standard)->get();
         return response()->json($students);
     }
+
+
     public function studentSearch(Request $request)
     {
-    //    dd($request);
-    $students = Student::where('standard_id', $request->standard)
-    ->with('standard:id,name', 'section:id,name', 'shift:id,name')
+    //    dd($request->all());
+    $standards = Standard::where('id', $request->standard)
+    ->with('section:id,name', 'shift:id,name')
     ->get();
     $marks=Mark::where('standard_id', $request->standard)
+    ->where('subject_id', $request->subject)
     ->with('student:id,first_name,roll_no', 'subject:id,name', 'grade:id,name')
+    ->orderBy('main', 'desc')
     ->get();
     $sessions = Standard::select('session')->distinct()->pluck('session');
 // dd($marks);
-    return view('Examination.mark.index', compact('students', 'marks','sessions'));
+    return view('Examination.mark.index', compact('standards', 'marks','sessions'));
     }
 }

@@ -24,8 +24,8 @@
                     </div>
                     <div class="col md-4">
                         <div class="input-group mb-3">
-                            <label for="shift_id" class="input-group-text">Shift</label>
-                            <select name="shift" id="shift_id" class="form-control">
+                            <label for="shift" class="input-group-text">Shift</label>
+                            <select name="shift" id="shift" class="form-control">
                                 <option value="-1">Select...</option>
 
                             </select>
@@ -34,8 +34,8 @@
                     <div class="col md-4">
                         <div class="input-group mb-3">
 
-                            <label for="standard_id" class="input-group-text">Class &#40;section&#41;</label>
-                            <select name="standard" id="standard_id" class="form-control">
+                            <label for="standard" class="input-group-text">Class &#40;section&#41;</label>
+                            <select name="standard" id="standard" class="form-control">
                                 <option value="-1">Select...</option>
 
                             </select>
@@ -45,8 +45,8 @@
                 <div class="row">
                     <div class="col md-4">
                         <div class="input-group mb-3">
-                            <label for="exam_id" class="input-group-text">Exam Type</label>
-                            <select name="exam" id="exam_id" class="form-control">
+                            <label for="exam" class="input-group-text">Exam Type</label>
+                            <select name="exam" id="exam" class="form-control">
                                 <option value="-1">Select...</option>
                                 @foreach ($exams as $id => $name)
                                     <option value="{{ $id }}">{{ $name }}</option>
@@ -56,8 +56,8 @@
                     </div>
                     <div class="col md-4">
                         <div class="input-group mb-3">
-                            <label for="subject_id" class="input-group-text">Subject</label>
-                            <select name="subject" id="subject_id" class="form-control">
+                            <label for="subject" class="input-group-text">Subject</label>
+                            <select name="subject" id="subject" class="form-control">
                                 <option value="-1">Select...</option>
 
                             </select>
@@ -68,7 +68,7 @@
             <hr>
 
             <div>
-                <p>Student List</p>
+
                 <input type="number" name="totalmarks" id="studentmarks" class="form-control"
                     placeholder="Enter Total Marks" required>
                 <div class="input-group mb-3 mt-3">
@@ -77,6 +77,7 @@
                 </div>
                 <table width="100%" class="table table-striped">
                     <thead>
+                        <caption>Student List</caption>
                         <tr>
                             <th>Roll</th>
                             <th>Name</th>
@@ -115,19 +116,19 @@
                             html += '<option value="' + key + '">' + value +
                                 '</option>';
                         });
-                        $('#shift_id').html(html);
+                        $('#shift').html(html);
                     }
                 });
             });
             // get Standard
-            $("#shift_id").change(function() {
+            $("#shift").change(function() {
                 let id = $(this).val();
                 let session = $("#session").val();
                 $.ajax({
                     type: "POST",
                     url: "{{ route('mark.getStandard') }}",
                     data: {
-                        shift_id: id,
+                        shift: id,
                         session: session,
                     },
                     success: function(data) {
@@ -139,18 +140,18 @@
                                 value.section.name + ')'
                             '</option>';
                         });
-                        $("#standard_id").html(html);
+                        $("#standard").html(html);
                     }
                 });
             });
             // get Subject
-            $("#standard_id").change(function() {
+            $("#standard").change(function() {
                 let id = $(this).val();
                 $.ajax({
                     type: "POST",
                     url: "{{ route('mark.getSubject') }}",
                     data: {
-                        standard_id: id,
+                        standard: id,
                     },
                     success: function(data) {
                         let options = '<option value="-1">Select...</option>';
@@ -159,7 +160,7 @@
                             // options += '<option value="' + key + '">' + value '</option>';
                             options += `<option value="${key}">${value}</option>`;
                         });
-                        $("#subject_id").html(options);
+                        $("#subject").html(options);
                     }
                 });
             });
@@ -167,10 +168,10 @@
             // search
             $("#searchBtn").click(function() {
                 let session = $("#session").val();
-                let shiftid = $("#shift_id").val();
-                let standardid = $("#standard_id").val();
-                let examid = $("#exam_id").val();
-                let subjectid = $("#subject_id").val();
+                let shiftid = $("#shift").val();
+                let standardid = $("#standard").val();
+                let examid = $("#exam").val();
+                let subjectid = $("#subject").val();
                 let totalmarks = $("#studentmarks").val();
 
 
@@ -181,7 +182,7 @@
                 }
 
                 let data = {
-                    standard_id: standardid,
+                    standard: standardid,
                     // marks:totalmarks
                 };
                 $.ajax({

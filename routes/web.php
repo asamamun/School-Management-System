@@ -105,7 +105,8 @@ Route::middleware(CheckAdmin::class)->group(function () {
     Route::post('/resultsheets/studentSearchResult', [ResultsheetController::class, 'studentSearchResult'])->name('resultsheet.studentSearchResult');
     Route::post('/resultsheets/shift', [ResultsheetController::class, 'getShift'])->name('resultsheet.getShift');
     Route::post('/resultsheets/standard', [ResultsheetController::class, 'getStandard'])->name('resultsheet.getStandard');
-    
+    Route::post('/resultsheets/subject', [MarkController::class, 'getSubject'])->name('resultsheet.getSubject');
+
     /**
      * attandence routes
      */
