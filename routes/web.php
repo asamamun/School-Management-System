@@ -34,9 +34,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/admission', [AdmissionController::class, 'index'])->name('admission.index');
-Route::get('/admission/create', [AdmissionController::class, 'create'])->name('admission.create');
-Route::post('/admission', [AdmissionController::class, 'store'])->name('admission.store');
+
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
 // })->middleware(['auth', 'verified'])->name('dashboard');
@@ -52,6 +50,17 @@ Route::get('/dashboard', function () {
         return redirect()->intended(route('staff.dashboard', absolute: false));
     }
 })->middleware(['auth'])->name('dashboard');
+
+/**
+ * public route
+ */
+Route::post('admission/search', [AdmissionController::class, 'search'])->name('student-info');
+Route::get('/admission', [AdmissionController::class, 'index'])->name('admission.index');
+Route::get('/admission-form/{standard}', [AdmissionController::class, 'admissionNow'])->name('admission.create');
+Route::post('/admission', [AdmissionController::class, 'store'])->name('admission.store');
+/**
+ * public route
+ */
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

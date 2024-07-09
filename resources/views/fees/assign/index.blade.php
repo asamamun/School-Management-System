@@ -27,14 +27,16 @@
                             </td>
                             <td>{{ $feesassign->standard->name ?? '' }}({{ $feesassign->standard->section->name ?? '' }})
                             </td>
-                            <td>{{ $feesassign->status ?? '' }}</td>
+                            <td
+                                class="{{ $feesassign->status == 'paid' ? 'border border-5 border-success' : 'border border-5 border-warning' }}">
+                                {{ $feesassign->status ?? '' }}</td>
                             <td>
                                 @if ($feesassign->status == 'paid')
                                     <a href="{{ route('feecollect.show', $feesassign) }}" title="View"><i
                                             class="fa fa-eye"></i></a>
                                 @else
-                                    {{-- <a href="{{ route('feecollect.create', $feesassign) }}" title="Collect"><i class="fa fa-money"></i></a> --}}
-                                    <a href="#" class="btn btn-info"><i class="fa fa-money"></i> Collect</a>
+                                    {{-- <a href="{{ route('feecollect.create', $feesassign) }}" title="Collect"><i class="fa fa-money"></i>Collect</a> --}}
+                                    {{-- <a href="{{ route('feecollect.create', $feesassign) }}" title="Collect" class="btn btn-info"><i class="fa fa-money"></i> Collect</a> --}}
                                 @endif
                             </td>
                     @endforeach

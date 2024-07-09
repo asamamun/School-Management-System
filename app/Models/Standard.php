@@ -60,4 +60,8 @@ class Standard extends Model
     {
         return $this->hasMany(Resultsheet::class);
     }
+    public function students(): HasMany
+    {
+        return $this->hasMany(Student::class);
+    }
 }

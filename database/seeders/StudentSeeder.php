@@ -16,7 +16,7 @@ class StudentSeeder extends Seeder
     public function run(): void
     {
         Standard::all()->each(function ($standard) {
-            $students = Student::factory()->count(40)->create([
+            $students = Student::factory()->count(20)->create([
                 'standard_id' => $standard->id,
                 'section_id' => $standard->section_id,
                 'shift_id' => $standard->shift_id,

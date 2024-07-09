@@ -46,17 +46,17 @@ class Student extends Model
         return $this->belongsTo(User::class);
     }
     // Define relationships
-    public function standard()
+    public function standard(): BelongsTo
     {
         return $this->belongsTo(Standard::class);
     }
 
-    public function section()
+    public function section(): BelongsTo
     {
         return $this->belongsTo(Section::class);
     }
 
-    public function shift()
+    public function shift(): BelongsTo
     {
         return $this->belongsTo(Shift::class);
     }

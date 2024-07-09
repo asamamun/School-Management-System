@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\FeesMaster;
 use App\Models\Section;
 use App\Models\Shift;
 use App\Models\Standard;
@@ -12,8 +13,15 @@ class StudentController extends Controller
 {
     public function index()
     {
-        $students = Student::paginate(10);
-        return view('student.student', compact('students'));
+        $standards = Standard::withCount(['students' => function ($query) {
+            $query->where('admission_status', 'applied')
+                ->whereDoesntHave('enrollment');
+        }])
+            ->get();
+        // dd($standards);
+        $students = Student::where('admission_status', 'applied')
+            ->whereDoesntHave('enrollment')->paginate(10);
+        return view('student.student', compact('students', 'standards'));
     }
 
     public function create()
@@ -50,21 +58,21 @@ class StudentController extends Controller
         $standards = Standard::all();
         $sections = Section::all();
         $shifts = Shift::all();
-        
+
         return view('student.edit', compact('student', 'standards', 'sections', 'shifts'));
     }
-    
+
 
     public function update(Request $request, Student $student)
     {
         // dd($request->all());
         $request->validate([
-            'admission_no' => 'required|unique:students,admission_no,'.$student->id,
-            'roll_no' => 'required|unique:students,roll_no,'.$student->id,
+            'admission_no' => 'required|unique:students,admission_no,' . $student->id,
+            'roll_no' => 'required|unique:students,roll_no,' . $student->id,
             'first_name' => 'required',
             'last_name' => 'required',
-            'email' => 'required|email|unique:students,email,'.$student->id,
-            'mobile' => 'numeric|unique:students,mobile,'.$student->id,          
+            'email' => 'required|email|unique:students,email,' . $student->id,
+            'mobile' => 'numeric|unique:students,mobile,' . $student->id,
             'shift_id' => 'required',
             'standard_id' => 'required',
             'dob' => 'required|date',
@@ -73,12 +81,12 @@ class StudentController extends Controller
             'blood_group' => 'required',
             'admission_date' => 'required|date',
             'status' => 'required',
-        ]);  
+        ]);
         $student->update($request->all());
-    
+
         return redirect()->route('student.index')->with('success', 'Student updated successfully.');
     }
-    
+
 
     public function destroy(Student $student)
     {
@@ -88,4 +96,3 @@ class StudentController extends Controller
         return redirect()->route('student.index')->with('success', 'Student deleted successfully.');
     }
 }
-

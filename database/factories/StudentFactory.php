@@ -20,8 +20,8 @@ class StudentFactory extends Factory
     public function definition(): array
     {
         return [
-           'admission_no' => fake()->unique()->numerify('Y######'),
-            'roll_no' => fake()->unique()->numerify('ROLL-######'),
+            'admission_no' => fake()->unique()->numerify('######'),
+            'roll_no' => fake()->unique()->numerify('#####'),
             'first_name' => fake()->firstName,
             'last_name' => fake()->lastName,
             'mobile' => fake()->phoneNumber,
@@ -44,4 +44,3 @@ class StudentFactory extends Factory
         ];
     }
 }
-

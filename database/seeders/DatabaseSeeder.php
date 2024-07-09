@@ -30,7 +30,7 @@ class DatabaseSeeder extends Seeder
 
         // Create 15 teachers
         foreach (range(1, 15) as $index) {
-            $name = "teacher{$index}";
+            $name = fake()->name();
             User::factory()->create([
                 'name' => $name,
                 'email' => $name . "@gmail.com",
@@ -41,9 +41,9 @@ class DatabaseSeeder extends Seeder
 
         // Create fixed shifts
         $shiftIds = [];
-        foreach (['morning', 'day', 'night'] as $index => $shiftName) {
-            $start_time = $index === 0 ? '07:00' : ($index === 1 ? '12:00' : '17:00');
-            $end_time = $index === 0 ? '12:00' : ($index === 1 ? '17:00' : '22:00');
+        foreach (['morning', 'day'] as $index => $shiftName) {
+            $start_time = $index === 0 ? '07:00' :  '12:00';
+            $end_time = $index === 0 ? '12:00' :  '17:00';
             $shift = Shift::create([
                 'name' => $shiftName,
                 'start_time' => $start_time,
@@ -66,7 +66,7 @@ class DatabaseSeeder extends Seeder
         foreach (['Class 01', 'Class 02', 'Class 03', 'Class 04', 'Class 05'] as $className) {
             Standard::create([
                 'name' => $className,
-                'session' => fake()->randomElement(['2020', '2021', '2022', '2023', '2024']),
+                'session' => '2024',
                 'shift_id' => fake()->randomElement($shiftIds),
                 'section_id' => fake()->randomElement($sectionIds),
                 'user_id' => User::where('role', 'teacher')->inRandomOrder()->first()->id,
@@ -75,7 +75,17 @@ class DatabaseSeeder extends Seeder
         }
 
         // Create 10 subjects
-        Subject::factory(10)->create();
+        foreach ([
+            'Bangla', 'English', 'Math', 'Science', 'Social Science', 'Religion', 'History', 'Geography', 'Civics', 'ICT'
+        ] as $subjectname) {
+            Subject::create([
+                'name' => $subjectname,
+                'code' => fake()->unique()->numberBetween(100, 999),
+                'status' => '1',
+            ]);
+        }
+
+
 
         // Call StudentSeeder to handle students and enrollments
         $this->call(

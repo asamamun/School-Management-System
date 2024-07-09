@@ -10,6 +10,7 @@ use App\Models\Standard;
 use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
+use PhpParser\Node\Stmt\TryCatch;
 
 class FeesCollectController extends Controller
 {
@@ -38,31 +39,32 @@ class FeesCollectController extends Controller
         $validatedData = $request->validate([
             'collect' => 'required|array',
             'payment_type' => 'required',
-            'trxid' => 'required',
-            'amount' => 'required|numeric',
+            'trxid' => $request->payment_type !== 'Cash' ? 'required' : 'nullable',
             'note' => 'required',
         ]);
 
         foreach ($request->collect as $feesAssignId) {
-            // dd($feesAssignId);
-            $feesAssign = FeesAssign::find($feesAssignId);
-            if ($feesAssign) {
+            $feesAssign = FeesAssign::with('feesMaster')->find($feesAssignId);
+            if ($feesAssign && $feesAssign->feesMaster) {
                 $feesCollect = new FeesCollect();
                 $feesCollect->fees_assign_id = $feesAssignId;
                 $feesCollect->payment_type = $request->payment_type;
                 $feesCollect->trxid = $request->trxid;
-                $feesCollect->amount = $request->amount;
+                $feesCollect->amount = $feesAssign->feesMaster->amount;
                 $feesCollect->date = date('Y-m-d');
                 $feesCollect->note = $request->note;
                 $feesCollect->save();
 
                 $feesAssign->status = 'paid';
                 $feesAssign->save();
+            } else {
+                return redirect()->route('feecollect.index')->with('error', 'Fees or Fees Master not found');
             }
         }
 
         return redirect()->route('feecollect.index')->with('success', 'Fees collected successfully');
     }
+
 
     /**
      * Display the specified resource.
@@ -138,7 +140,7 @@ class FeesCollectController extends Controller
     }
     /**
      * this function value set in option value
-     * 
+     *
      */
     public function getStudentsFromSection(Request $request)
     {
