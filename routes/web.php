@@ -14,6 +14,8 @@ use App\Http\Controllers\GradeController;
 use App\Http\Controllers\MarkController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ResultsheetController;
+use App\Http\Controllers\RoutienController;
+use App\Http\Controllers\RoutineController;
 use App\Http\Controllers\SectionController;
 use App\Http\Controllers\ShiftController;
 use App\Http\Controllers\StandardController;
@@ -121,6 +123,14 @@ Route::middleware(CheckAdmin::class)->group(function () {
      */
     Route::resource('/attendance', AttendanceController::class);
     Route::post('/attendance/search', [AttendanceController::class, 'search'])->name('searchstudentforattendance');
+
+    /**
+     * Class Routin  
+     */
+    Route::get('routines', [RoutineController::class, 'index'])->name('routines.index');
+    // route('routine.create')
+    Route::get('routine/create', [RoutineController::class, 'create'])->name('routines.create');
+    Route::post('routine/store', [RoutineController::class, 'store'])->name('routines.store');
 });
 
 Route::middleware(CheckStaff::class)->group(function () {
