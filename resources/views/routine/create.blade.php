@@ -1,7 +1,7 @@
 @extends('layouts.adminapp', ['title' => 'Admin | Routine assign | Create'])
 
 @section('content')
-    <div class="container">
+    <div class="container-fluid">
         <h1 class="text-center mb-3">Class Routine</h1>
 
         <form action="{{ route('routines.store') }}" method="post" id="routineForm">
@@ -13,11 +13,12 @@
                 <div class="">
                     <div class="input-group">
                         <label class="input-group-text" for="select_class">Select Class:</label>
-                        <select name="select_class" id="select_class" class="form-select" required>
+                        <select name="select_class" id="select_class" class="form-select">
                             <option value="">Select a class</option>
                             @foreach ($standards as $standard)
                                 <option
-                                    value="{{ old('select_class', json_encode(['id' => $standard->id, 'name' => $standard->name])) }}">
+                                    value="{{ json_encode(['id' => $standard->id, 'name' => $standard->name]) }}"
+                                    {{ old('select_class') == json_encode(['id' => $standard->id, 'name' => $standard->name]) ? 'selected' : '' }}>
                                     {{ $standard->name }}</option>
                             @endforeach
                         </select>
@@ -51,7 +52,7 @@
                                         @endphp
                                         <td>
                                             <select name="schedule[{{ $day }}][{{ $time }}][subjects]"
-                                                id="{{ $subjectId }}" class="form-select form-select-sm mb-2" required>
+                                                id="{{ $subjectId }}" class="form-select form-select-sm mb-2">
                                                 <option value="">Select</option>
                                                 @foreach ($subjects as $subject)
                                                     <option value="{{ $subject }}"
@@ -60,7 +61,7 @@
                                                 @endforeach
                                             </select>
                                             <select name="schedule[{{ $day }}][{{ $time }}][teachers]"
-                                                id="{{ $teacherId }}" class="form-select form-select-sm" required>
+                                                id="{{ $teacherId }}" class="form-select form-select-sm">
                                                 <option value="">Select</option>
                                                 @foreach ($teachers as $teacher)
                                                     <option value="{{ $teacher }}"
@@ -69,7 +70,7 @@
                                                 @endforeach
                                             </select>
                                             <span id="routine_label_{{ $subjectId }}" class="routine-label"></span>
-                                            <span class="edit-icon"  id="edit_{{ $subjectId }}"></span>
+                                            <span class="edit-icon" id="edit_{{ $subjectId }}"></span>
                                         </td>
                                     @endforeach
                                 </tr>
@@ -88,7 +89,7 @@
 @section('script')
     <script>
         $(document).ready(function() {
-            $('#select_class').change(function() {
+            $(document).on('change', '#select_class', function() {
                 const selected_class = $(this).val();
                 if (selected_class) {
                     const class_data = JSON.parse(selected_class);
@@ -99,34 +100,24 @@
                     $('#selected_clas_id').val('');
                 }
             });
-            $(document).on('change', '#routineForm .form-select',
-                function() {
-                    var selectedSubject = $(this).closest('td').find('select[name$="[subjects]"]');
-                    var selectedTeacher = $(this).closest('td').find('select[name$="[teachers]"]');
-                    var label = $(this).closest('td').find('span#routine_label_'+selectedSubject.attr('id'));
-                    var edit = $(this).closest('td').find('span#edit_'+selectedSubject.attr('id'));
-                    console.log(edit.attr('id'));
-                    console.log(selectedSubject.attr('id'));
-                    var subjectId = selectedSubject.attr('id');
-                    var teacherId = selectedTeacher.attr('id');
-
-                    if(selectedSubject.val() && selectedTeacher.val()) {
-                        selectedSubject.addClass('d-none');
-                        selectedTeacher.addClass('d-none');
-                        label.text(selectedSubject.val() + ' ( ' + selectedTeacher.val()+' )');
-                        label.removeClass('d-none');
-                        edit.removeClass('d-none');
-                        edit.addClass('btn btn-warning inline btn-sm');
-                        edit.append('<i class="fa fa-edit"></i>');
-                    }
-                    edit.on('click', function() {
-                        selectedSubject.removeClass('d-none');
-                        selectedTeacher.removeClass('d-none');
-                        label.addClass('d-none');
-                        edit.addClass('d-none');
-                        edit.html('');
-                    })
-
+            $(document).on('change', '#routineForm .form-select', function() {
+                var $subject = $(this).closest('td').find('select[name$="[subjects]"]');
+                var $teacher = $(this).closest('td').find('select[name$="[teachers]"]');
+                var $label = $(this).closest('td').find('span#routine_label_' + $subject.attr('id'));
+                var $edit = $(this).closest('td').find('span#edit_' + $subject.attr('id'));
+                if ($subject.val() && $teacher.val()) {
+                    $subject.addClass('d-none');
+                    $teacher.addClass('d-none');
+                    $label.text($subject.val() + ' ( ' + $teacher.val() + ' )').removeClass('d-none');
+                    $edit.removeClass('d-none').addClass('btn btn-warning inline btn-sm').append(
+                        '<i class="fa fa-edit"></i>');
+                }
+                $edit.on('click', function() {
+                    $subject.removeClass('d-none');
+                    $teacher.removeClass('d-none');
+                    $label.addClass('d-none');
+                    $edit.addClass('d-none').html('');
+                });
             });
         });
     </script>

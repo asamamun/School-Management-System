@@ -16,6 +16,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ResultsheetController;
 use App\Http\Controllers\RoutienController;
 use App\Http\Controllers\RoutineController;
+use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\SectionController;
 use App\Http\Controllers\ShiftController;
 use App\Http\Controllers\StandardController;
@@ -128,9 +129,12 @@ Route::middleware(CheckAdmin::class)->group(function () {
      * Class Routin  
      */
     Route::get('routines', [RoutineController::class, 'index'])->name('routines.index');
-    // route('routine.create')
     Route::get('routine/create', [RoutineController::class, 'create'])->name('routines.create');
     Route::post('routine/store', [RoutineController::class, 'store'])->name('routines.store');
+    Route::get('routine/{routine}', [RoutineController::class, 'show'])->name('routine.show');
+
+    Route::get('schedule', [ScheduleController::class, 'index'])->name('routines.time');
+    Route::post('schedule', [ScheduleController::class, 'store'])->name('routinestime.store');
 });
 
 Route::middleware(CheckStaff::class)->group(function () {

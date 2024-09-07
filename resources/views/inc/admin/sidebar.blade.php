@@ -115,6 +115,11 @@
                     <div class="sb-nav-link-icon"><i class="fas fa-calendar-week"></i></div>
                     Result
                 </a>
+                 {{-- Routine --}}
+                 <a class="nav-link"href="{{ route('routines.index') }}">
+                    <div class="sb-nav-link-icon"><i class="fas fa-calendar-week"></i></div>
+                    Routine
+                </a>
                 {{-- /Result --}}
                 {{-- /attendance --}}
                 {{-- Interface --}}

@@ -68,3 +68,16 @@ class StudentHelper
         return str_pad($newRollNo, 5, '0', STR_PAD_LEFT);
     }
 }
+if (!function_exists('getWeekDays')) {
+    function getWeekDays($excludeDays = []) {
+        $days = ['saturday', 'sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday'];
+
+        if (!empty($excludeDays)) {
+            $days = array_filter($days, function($day) use ($excludeDays) {
+                return !in_array($day, $excludeDays);
+            });
+        }
+
+        return array_values($days);
+    }
+}

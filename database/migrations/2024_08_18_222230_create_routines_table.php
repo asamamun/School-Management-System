@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('routiens', function (Blueprint $table) {
+        Schema::create('routines', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('standard_id');
-            $table->json('routien');
+            $table->json('routine');
             $table->timestamps();
             $table->foreign('standard_id')->references('id')->on('standards')->onDelete('cascade');
 

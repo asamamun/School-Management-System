@@ -9,10 +9,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Routine extends Model
 {
     use HasFactory;
-    protected $table = 'routiens';
+    protected $table = 'routines';
     protected $fillable = [
         'standard_id',
-        'routien',
+        'routine',
     ];
     public function standard(): BelongsTo
     {

@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Routine;
+use App\Models\schedule;
 use App\Models\Standard;
 use App\Models\Subject;
 use App\Models\User;
-use Hamcrest\Type\IsArray;
 use Illuminate\Http\Request;
 
 class RoutineController extends Controller
@@ -16,7 +16,16 @@ class RoutineController extends Controller
      */
     public function index()
     {
-        $standards = Standard::all();
+        $standardIds = Routine::pluck('standard_id');
+
+        $standards = Standard::whereIn('id', $standardIds)
+            ->with([
+                'section:id,name',
+                'shift:id,name',
+                'routines:id,standard_id'
+            ])
+            ->get();
+
         return view('routine.index', compact('standards'));
     }
 
@@ -25,14 +34,11 @@ class RoutineController extends Controller
      */
     public function create()
     {
-        $days = ['saturday', 'sunday', 'monday', 'tuesday', 'wednesday', 'thursday'];
-        $class_times = ['9:00am-10:00am', '10:00am-11:00am', '11:00am-12:00pm', '12:00pm-1:00pm', '1:00pm-2:00pm', '2:00pm-3:00pm', '3:00pm-4:00pm'];
-        $subjects = ['English', 'Maths', 'Science', 'Social Science', 'Bangla', 'Arabic', 'Computer Science', 'Chemistry', 'Physics'];
-        $teachers = ['Mr. Smith', 'Ms. Johnson', 'Mr. Brown', 'Ms. Williams', 'Mr. Jones', 'Ms. Garcia', 'Mr. Martinez', 'Ms. Davis', 'Mr. Rodriguez'];
+        $days = getWeekDays(['friday']);
 
-        // $subjects = Subject::all();
-        // $teachers = User::where('role', 'teacher')->get();
-
+        $class_times = Schedule::pluck('time_range')->toArray();
+        $subjects = Subject::pluck('name')->toArray();
+        $teachers = User::where('role', 'teacher')->pluck('name')->toArray();
 
         $standards = Standard::all();
         return view('routine.create', compact('standards', 'days', 'class_times', 'subjects', 'teachers'));
@@ -43,13 +49,13 @@ class RoutineController extends Controller
      */
     public function store(Request $request)
     {
-        // Decode JSON string if 'select_class' is a JSON string
+
         if (is_string($request->input('select_class'))) {
             $request->merge([
                 'select_class' => json_decode($request->input('select_class'), true)
             ]);
         }
-        // // Validate the request data
+
         $request->validate([
             'select_class' => 'required|array',
             'select_class.id' => 'required|integer',
@@ -60,28 +66,38 @@ class RoutineController extends Controller
             'schedule.*.*' => 'required|array',
 
         ]);
-        if(array($request->input('schedule'))){
+
+        if (array($request->input('schedule'))) {
             $request->merge([
                 'schedule' => json_encode($request->input('schedule'), true)
             ]);
         }
-        // dd($request->schedule);
+
+
         $routine = new Routine();
         $routine->standard_id = $request->selected_class;
-        $routine->routien = $request->schedule;
+        $routine->routine = $request->schedule;
         $routine->save();
 
         return redirect()->route('routines.index')->with('success', 'Routine created successfully!');
-
     }
-
+ 
 
     /**
      * Display the specified resource.
      */
     public function show(Routine $routine)
     {
-        //
+        $decodedRoutine = json_decode($routine->routine, true);
+        $routine->load([
+            'standard.shift:id,name',
+            'standard.section:id,name'
+        ]);
+
+        // dd($decodedRoutine);
+        
+
+        return view('routine.show', compact('routine', 'decodedRoutine'));
     }
 
     /**
@@ -106,5 +122,9 @@ class RoutineController extends Controller
     public function destroy(Routine $routine)
     {
         //
+    }
+    public function timesIndex()
+    {
+        return view('routine.times');
     }
 }

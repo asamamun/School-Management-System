@@ -65,8 +65,8 @@ class Standard extends Model
     {
         return $this->hasMany(Student::class);
     }
-    public function routien(): HasOne
+    public function routines(): HasMany
     {
-        return $this->hasOne(Routine::class);
+        return $this->hasMany(Routine::class, 'standard_id');
     }
 }
