@@ -8,13 +8,17 @@ use Illuminate\Http\Request;
 class UserController extends Controller
 {
     /**
+     * public HTTP request
+     */
+    public function eiewWelcome(){
+        return view('welcome');
+    }
+    /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
-        // $users = User::all();
-        return view('admin.dashboard');
+        // 
     }
 
     /**
@@ -64,4 +68,5 @@ class UserController extends Controller
     {
         //
     }
+    
 }
