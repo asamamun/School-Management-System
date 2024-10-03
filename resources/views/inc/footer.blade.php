@@ -6,7 +6,7 @@
           {{-- footer logo --}}
           <div class="col-lg-3 mb-3">
             <a class="d-inline-flex align-items-center mb-2 text-body-emphasis text-decoration-none" href="#" aria-label="Bootstrap">
-              <img src="{{ asset('assets/image/icon.png') }}" alt="Logo" style="max-width: 60px; max-height: 60px;">
+              <img src="{{ asset('storage/image/icon.png') }}" alt="Logo" style="max-width: 60px; max-height: 60px;">
                <span style="font-size: 1.50rem; font-weight: bold" class=" ">
                 {{ config('app.name', 'Laravel') }}
                </span>

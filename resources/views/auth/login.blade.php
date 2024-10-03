@@ -2,7 +2,7 @@
 @section('content')
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
-    <div class="container-fluid d-flex justify-content-center align-items-center vh-100" style="background: url('{{ asset('assets/image/main.png') }}') no-repeat center center / cover; position: relative;">
+    <div class="container-fluid d-flex justify-content-center align-items-center vh-100" style="background: url('{{ asset('storage/image/main.png') }}') no-repeat center center / cover; position: relative;">
         <!-- Gradient Overlay -->
         <div class="overlay position-absolute top-0 start-0 w-100 h-100 opacity-50 bg-black"></div>
     
