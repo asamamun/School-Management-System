@@ -46,6 +46,10 @@ php artisan key:generate
 ### 6. Run the migrations
 Set up the database and run the migrations:
 ```bash
+php artisan migrate
+```
+and
+```bash
 php artisan db:seed
 ```
 ### Project user role is 
