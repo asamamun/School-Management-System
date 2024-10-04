@@ -43,6 +43,10 @@ Route::prefix('artisan')->group(function () {
         Route::get('/seed', 'seed');
         Route::get('/optimize-clear', 'optimizeClear');
         Route::get('/clear-cache', 'clearCache');
+        Route::get('/route-clear', 'routeClear');
+        Route::get('/view-clear', 'viewClear');
+        Route::get('/storage-link', 'storageLink');
+        Route::get('/custom-storage-link', 'customStorageLink');
     });
 });
 

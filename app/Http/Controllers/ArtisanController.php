@@ -40,6 +40,38 @@ class ArtisanController extends Controller
         Artisan::call('cache:clear');
         return 'Cache cleared successfully!';
     }
-    // public function migrationFresh(){
-    // }
+    public function routeClear(){
+        Artisan::call('route:clear');
+        return 'Routes cache cleared successfully!';
+    }
+
+    public function viewClear(){
+        Artisan::call('view:clear');
+        return 'Views cache cleared successfully!';
+    }
+
+    public function storageLink(){
+        Artisan::call('storage:link');
+        return 'Storage link created successfully!';
+    }
+
+    public function customStorageLink(){
+        $targetFolder = storage_path('app/public');
+        $linkFolder = $_SERVER['DOCUMENT_ROOT'].'/school-management/storage';
+
+        try {
+            if (file_exists($linkFolder)) {
+                unlink($linkFolder);
+            }
+
+            if (!file_exists($linkFolder)) {
+                symlink($targetFolder, $linkFolder);
+                mkdir($linkFolder, 0777, true);
+            }
+        } catch (\Exception $e) {
+            return 'Custom storage link could not be created!';
+        }
+
+        return 'Custom storage link created successfully!';
+    }
 }
